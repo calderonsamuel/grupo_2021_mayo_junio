@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 1 Desarrollo Humano y COVID | Elaboración de productos de datos: Reportes con R Markdown</title>
+  <meta name="description" content="Este libro es una compilación de reportes individuales trabajados durante mayo y junio del 2021 en el Taller de Elaboración de productos de datos dictado por Samuel Calderon." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 1 Desarrollo Humano y COVID | Elaboración de productos de datos: Reportes con R Markdown" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Este libro es una compilación de reportes individuales trabajados durante mayo y junio del 2021 en el Taller de Elaboración de productos de datos dictado por Samuel Calderon." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 1 Desarrollo Humano y COVID | Elaboración de productos de datos: Reportes con R Markdown" />
+  
+  <meta name="twitter:description" content="Este libro es una compilación de reportes individuales trabajados durante mayo y junio del 2021 en el Taller de Elaboración de productos de datos dictado por Samuel Calderon." />
+  
+
+<meta name="author" content="Samuel Calderon, Felipe Bedoya, Maira Chamota, Jennifer Ponce, Nelly Reyes, Almendra Rodriguez" />
+
+
+<meta name="date" content="2021-07-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sobre-los-autores.html"/>
+<link rel="next" href="saludcovid.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Elaboración de productos de datos: Reportes con R Markdown</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html"><i class="fa fa-check"></i>Sobre los autores</a>
+<ul>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#felipe-bedoya"><i class="fa fa-check"></i>Felipe Bedoya</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#maira-chamota"><i class="fa fa-check"></i>Maira Chamota</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#jennifer-ponce"><i class="fa fa-check"></i>Jennifer Ponce</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#nelly-reyes"><i class="fa fa-check"></i>Nelly Reyes</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#almendra-rodriguez"><i class="fa fa-check"></i>Almendra Rodriguez</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#samuel-calderon"><i class="fa fa-check"></i>Samuel Calderon</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="idh.html"><a href="idh.html"><i class="fa fa-check"></i><b>1</b> Desarrollo Humano y COVID</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="idh.html"><a href="idh.html#introducción"><i class="fa fa-check"></i><b>1.1</b> Introducción</a></li>
+<li class="chapter" data-level="1.2" data-path="idh.html"><a href="idh.html#paquetes-usados"><i class="fa fa-check"></i><b>1.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="1.3" data-path="idh.html"><a href="idh.html#conjuntos-de-datos-usaddos"><i class="fa fa-check"></i><b>1.3</b> Conjuntos de datos usaddos</a></li>
+<li class="chapter" data-level="1.4" data-path="idh.html"><a href="idh.html#resultados"><i class="fa fa-check"></i><b>1.4</b> Resultados</a></li>
+<li class="chapter" data-level="1.5" data-path="idh.html"><a href="idh.html#conclusiones"><i class="fa fa-check"></i><b>1.5</b> Conclusiones</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="saludcovid.html"><a href="saludcovid.html"><i class="fa fa-check"></i><b>2</b> Análisis del Perfil de Usuarios de Servicios de Salud para Pacientes con Síntomas De Covid 19 durante el 2020</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="saludcovid.html"><a href="saludcovid.html#introducción-1"><i class="fa fa-check"></i><b>2.1</b> Introducción</a></li>
+<li class="chapter" data-level="2.2" data-path="saludcovid.html"><a href="saludcovid.html#paquetes-usados-1"><i class="fa fa-check"></i><b>2.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="2.3" data-path="saludcovid.html"><a href="saludcovid.html#conjuntos-de-datos-usados"><i class="fa fa-check"></i><b>2.3</b> Conjuntos de datos usados</a></li>
+<li class="chapter" data-level="2.4" data-path="saludcovid.html"><a href="saludcovid.html#resultados-1"><i class="fa fa-check"></i><b>2.4</b> Resultados</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="saludcovid.html"><a href="saludcovid.html#frecuencia-y-porcentaje-de-opciones-preferidas-para-acceder-a-servicios-de-salud"><i class="fa fa-check"></i><b>2.4.1</b> FRECUENCIA Y PORCENTAJE DE OPCIONES PREFERIDAS PARA ACCEDER A SERVICIOS DE SALUD</a></li>
+<li class="chapter" data-level="2.4.2" data-path="saludcovid.html"><a href="saludcovid.html#frecuencia-y-porcentaje-de-razones-de-negación-a-buscar-servicios"><i class="fa fa-check"></i><b>2.4.2</b> FRECUENCIA Y PORCENTAJE DE RAZONES DE NEGACIÓN A BUSCAR SERVICIOS</a></li>
+<li class="chapter" data-level="2.4.3" data-path="saludcovid.html"><a href="saludcovid.html#casos-de-resultado-1-y-2-analizados-por-géneros"><i class="fa fa-check"></i><b>2.4.3</b> Casos de resultado 1 y 2, analizados por géneros</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="saludcovid.html"><a href="saludcovid.html#conclusiones-1"><i class="fa fa-check"></i><b>2.5</b> Conclusiones</a></li>
+<li class="chapter" data-level="2.6" data-path="saludcovid.html"><a href="saludcovid.html#referencias"><i class="fa fa-check"></i><b>2.6</b> Referencias</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html"><i class="fa fa-check"></i><b>3</b> SJL: Una primera mirada a últimas cinco elecciones municipales (2002-2018)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#introducción-2"><i class="fa fa-check"></i><b>3.1</b> Introducción</a></li>
+<li class="chapter" data-level="3.2" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#paquetes-usados-2"><i class="fa fa-check"></i><b>3.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="3.3" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#conjuntos-de-datos-usados-1"><i class="fa fa-check"></i><b>3.3</b> Conjuntos de datos usados</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#autoridades-distritales-cinco-elecciones-municipales-2002-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.1</b> Autoridades Distritales: Cinco Elecciones Municipales 2002, 2006, 2010, 2014, 2018</a></li>
+<li class="chapter" data-level="3.3.2" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#candidatos-distritales-cinco-elecciones-municipales-2002-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.2</b> Candidatos Distritales: Cinco Elecciones Municipales 2002, 2006, 2010, 2014, 2018</a></li>
+<li class="chapter" data-level="3.3.3" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#extranyendo-la-información-sobre-san-juan-de-lurigancho-autoridades-municipales-2002-2006-2010-2014-y-2018"><i class="fa fa-check"></i><b>3.3.3</b> Extranyendo la información sobre San Juan de Lurigancho: Autoridades municipales 2002, 2006, 2010, 2014 y 2018</a></li>
+<li class="chapter" data-level="3.3.4" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#sobre-la-base-2018"><i class="fa fa-check"></i><b>3.3.4</b> Sobre la base 2018</a></li>
+<li class="chapter" data-level="3.3.5" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#una-sola-base-autoridades-municipales-sjl-2002-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.5</b> Una sola base: Autoridades Municipales SJL 2002, 2006, 2010, 2014, 2018</a></li>
+<li class="chapter" data-level="3.3.6" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#extrayendo-la-información-disponible-sobre-la-base-de-candidatos-distritales-elecciones-2002-2004-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.6</b> Extrayendo la información disponible sobre la Base de Candidatos Distritales: elecciones 2002, 2004, 2006, 2010, 2014, 2018</a></li>
+<li class="chapter" data-level="3.3.7" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#una-sola-base-candidatos-distritales-sjl-2002-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.7</b> Una sola base: Candidatos Distritales SJL 2002, 2006, 2010, 2014, 2018</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#resultados-1-1"><i class="fa fa-check"></i><b>3.4</b> RESULTADOS 1 :</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#el-número-de-votos-y-porcentaje-de-votación-de-los-alcaldes-ganadores-por-año-electoral"><i class="fa fa-check"></i><b>3.4.1</b> El número de votos y porcentaje de votación de los alcaldes ganadores por año electoral</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#resultados-2"><i class="fa fa-check"></i><b>3.5</b> RESULTADOS 2:</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#evolución-del-número-y-tipo-de-organización-política-por-año-electoral"><i class="fa fa-check"></i><b>3.5.1</b> Evolución del número y tipo de organización política por año electoral</a></li>
+<li class="chapter" data-level="3.5.2" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#la-evolución-del-número-de-organizaciones-políticas-por-año-electoral"><i class="fa fa-check"></i><b>3.5.2</b> La evolución del número de organizaciones políticas por año electoral</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#conclusiones-2"><i class="fa fa-check"></i><b>3.6</b> Conclusiones</a></li>
+<li class="chapter" data-level="3.7" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#referencias-1"><i class="fa fa-check"></i><b>3.7</b> Referencias</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html"><i class="fa fa-check"></i><b>4</b> Midiendo el pulso de la democracia en el Perú, 2008 - 2019</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#introducción-3"><i class="fa fa-check"></i><b>4.1</b> Introducción</a></li>
+<li class="chapter" data-level="4.2" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#paquetes-usados-3"><i class="fa fa-check"></i><b>4.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="4.3" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#conjuntos-de-datos-usados-2"><i class="fa fa-check"></i><b>4.3</b> Conjuntos de datos usados</a></li>
+<li class="chapter" data-level="4.4" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#resultados-3"><i class="fa fa-check"></i><b>4.4</b> Resultados</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#desapego-democrático-el-apoyo-y-la-satisfacción-con-la-democracia-en-franco-descenso"><i class="fa fa-check"></i><b>4.4.1</b> Desapego democrático: El apoyo y la satisfacción con la democracia en franco descenso</a></li>
+<li class="chapter" data-level="4.4.2" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#satisfacción-con-la-democracia-perú-2008---2019"><i class="fa fa-check"></i><b>4.4.2</b> Satisfacción con la democracia, Perú 2008 - 2019</a></li>
+<li class="chapter" data-level="4.4.3" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#apoyo-a-la-democracia-perú-2008---2019"><i class="fa fa-check"></i><b>4.4.3</b> Apoyo a la democracia, Perú 2008 - 2019</a></li>
+<li class="chapter" data-level="4.4.4" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#existe-relación-entre-el-apoyo-y-la-satifacción-con-la-democracia-en-el-perú"><i class="fa fa-check"></i><b>4.4.4</b> ¿Existe relación entre el apoyo y la satifacción con la democracia en el Perú?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#conclusiones-3"><i class="fa fa-check"></i><b>4.5</b> Conclusiones</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#la-democracia-en-el-perú-pierde-seguidores"><i class="fa fa-check"></i><b>4.5.1</b> La democracia en el Perú pierde seguidores</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#referencias-2"><i class="fa fa-check"></i><b>4.6</b> Referencias</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="orgJuveniles.html"><a href="orgJuveniles.html"><i class="fa fa-check"></i><b>5</b> Algunos reportes respecto a las organizaciones juveniles a partir del Registro Nacional de Municipalidades - RENAMU 2020 y 2019</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="orgJuveniles.html"><a href="orgJuveniles.html#paquetes-usados-4"><i class="fa fa-check"></i><b>5.1</b> Paquetes usados</a></li>
+<li class="chapter" data-level="5.2" data-path="orgJuveniles.html"><a href="orgJuveniles.html#conjuntos-de-datos-usados-3"><i class="fa fa-check"></i><b>5.2</b> Conjuntos de datos usados</a></li>
+<li class="chapter" data-level="5.3" data-path="orgJuveniles.html"><a href="orgJuveniles.html#resultados-4"><i class="fa fa-check"></i><b>5.3</b> Resultados</a></li>
+<li class="chapter" data-level="5.4" data-path="orgJuveniles.html"><a href="orgJuveniles.html#algunas-conclusiones"><i class="fa fa-check"></i><b>5.4</b> Algunas conclusiones</a></li>
+<li class="chapter" data-level="5.5" data-path="orgJuveniles.html"><a href="orgJuveniles.html#referencias-3"><i class="fa fa-check"></i><b>5.5</b> Referencias</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elaboración de productos de datos: Reportes con R Markdown</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="idh" class="section level1" number="1">
+<h1><span class="header-section-number">Capítulo 1</span> Desarrollo Humano y COVID</h1>
+<p><em>Felipe Bedoya</em></p>
+<div id="introducción" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Introducción</h2>
+<!-- TODO: Buena intro, sólo necesitarías redondearla planteando el tema en forma de pregunta. Pienso que sería algo tipo: ¿Es posible establecer una relación entre IDH e incidencia de Covid? Debes escribir la que aterrices tú en uno de estos párrafos -->
+<p>De acuerdo con el Programa de las Naciones Unidas para el Desarrollo (PNUD), el nivel de desarrollo humano alcanzado en los últimos 30 años podría retroceder debido al COVID-19 debido a su impacto en la salud, educación e ingresos de la población<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p>Como se sabe, el nivel de desarrollo humano de los países se mide a través del Índice de Desarrollo Humano del PNUD, que es un indicador que toma en cuenta la esperanza de vida al nacer, los logros educativos y los ingresos per cápita.</p>
+<p>El Informe “El Reto de la Igualdad”<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> del PNUD Perú menciona que en el periodo 2003-2019, el Perú ha experimentado un incremento sostenido de los niveles de desarrollo humano a nivel nacional, no obstante se observan marcadas brechas de desigualdad explicada por factores productivos y territoriales.</p>
+<p>Justamente estos factores que explican los diferentes niveles de desarrollo humano en el país podrían aportar, entre otros aspectos, a la mayor incidencia del COVID en distintas zonas del país. Por ejemplo, a lo largo de la costa, por ser el principal eje económico, o bien en las principales ciudades capitales debido a una mayor densidad poblacional.</p>
+<p>En el marco de lo anterior, cabe la pregunta ¿es posible que el nivel del desarrollo humano incida en el mayor número de casos de covid?. Todo hace pensar que existe una relacion inversa entre ambos, a mayor nivel de desarrollo menor incidencia de COVID. Sin embargo, paises con altos índices de desarrollo han sufrido los efectos del COVID en su territorio.</p>
+<p>Para responder a la preguta planteada, exploraremos la incidencia de casos de COVID y el nivel de desarrollo humano en los distritos de la provincia de Talara, como caso de análisis.</p>
+</div>
+<div id="paquetes-usados" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Paquetes usados</h2>
+<!-- Perfecto! Así de conciso está muy bien -->
+<p>Se utilizaron los siguientes paquetes “readxl” y “tidyverse.” El primero para importar bases de datos en excel y el segundo para realizar el análisis de datos. Asimismo, usaremos el paquete “ggthemes” para editar la apariencia de nuestros gráficos.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="idh.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-2"><a href="idh.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="idh.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span></code></pre></div>
+</div>
+<div id="conjuntos-de-datos-usaddos" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Conjuntos de datos usaddos</h2>
+<p>Los datos empleados serán los de Casos Positivos COVID-19 del MINSA y el Indice de Desarrollo Humano del PNUD.</p>
+<p>El Índice de Desarrollo Humano (IDH) se puede descargar de la página web del Estudio de actualización de los indices de desarrollo humano el PNUD en el siguiente enlace:
+<a href="https://www.pe.undp.org/content/dam/peru/docs/Publicaciones%20pobreza/idh2019/IDH%202019.xlsx" class="uri">https://www.pe.undp.org/content/dam/peru/docs/Publicaciones%20pobreza/idh2019/IDH%202019.xlsx</a></p>
+<p>Y los casos positivos de COVID se puede descarga de la página web de Datos Abiertos del MINSA en el siguiente enlace:
+<a href="https://cloud.minsa.gob.pe/s/AC2adyLkHCKjmfm/download" class="uri">https://cloud.minsa.gob.pe/s/AC2adyLkHCKjmfm/download</a></p>
+<p>En el primer caso, se presenta información a nivel distrital, provincial y departamental de los componentes del Índice de Desarollo Humano, que comprende la Esperanza de Vida al nacer, medida en años; el Logro Educativo, es decir los años de estudios alcanzados en la poblacion de 25 años a más y la poblacion mayoor de 18 años con educacion secundaria; y los Ingresos Familiares per cápita.</p>
+<p>En el segundo caso, la información de los casos positivos COVID contiene datos sobre el distrito, provincia y departamento de las personas que son positivas, segun el tipo de prueba realizada, la fecha del registro de la misma, y la fecha de corte.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="idh.html#cb2-1" aria-hidden="true" tabindex="-1"></a>positivos_covid <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">&quot;data/positivos_covid.csv&quot;</span>)</span></code></pre></div>
+<!-- Fue necesario modificar este archivo por el límite de tamaño de Github -->
+<!-- TODO: Está bien resumir en gráficos. Me aclaras si es que en ninguno de ellos aplicarás algún tema de ggplot2 o del paquete ggthemes (revisar la parte final de sesión de Gramática de los gráficos) -->
+<p>En el marco de lo anterior, veremos el caso de la provincia de Talara (Piura).</p>
+<p>Los casos del COVID-19 al 16 de junio del 2021, según distritos. El mayor numero de casos COVID-19 positivos se registran en el distrito de Pariñas (3,223 casos), seguido de Máncora y Los Órganos (690 y 518 casos respectivamente).</p>
+<p>A continuación, la Figura 1 muestra el total de casos para los distritos de la provincia de Talara.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="idh.html#cb3-1" aria-hidden="true" tabindex="-1"></a>positivos_covid <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="idh.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(FECHA_RESULTADO, PROVINCIA, DISTRITO, SEXO, EDAD) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="idh.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> (PROVINCIA <span class="sc">==</span> <span class="st">&quot;TALARA&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="idh.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(DISTRITO) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="idh.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_casos =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="idh.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total_casos)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="idh.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a href="idh.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(total_casos, DISTRITO, <span class="at">fill =</span> DISTRITO)) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="idh.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb3-10"><a href="idh.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span> (</span>
+<span id="cb3-11"><a href="idh.html#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Casos COVID-19 positivos&quot;</span>,</span>
+<span id="cb3-12"><a href="idh.html#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Talara según distritos&quot;</span>,</span>
+<span id="cb3-13"><a href="idh.html#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;N° de casos&quot;</span>,</span>
+<span id="cb3-14"><a href="idh.html#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Distrito&quot;</span></span>
+<span id="cb3-15"><a href="idh.html#cb3-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-16"><a href="idh.html#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_base</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>En cuanto al IDH, en la provincia de Talara los distritos con mayor IDH son Lobitos y Pariñas con 0.59, en segundo lugar, se ubica La Brea (0.58), seguido de El Alto (0.56). Los Órganos y Máncora ocupan los últimos lugares con 0.56 en cada caso.</p>
+<!-- TODO: Esta sección en la que lees nueva data y la limpia para conseguir "idh_talara" también debe ir en la sección de "Conjuntos de datos usados". Reversar para "Resultados" solo código que produzca tablas de resumen y gráficos. -->
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="idh.html#cb4-1" aria-hidden="true" tabindex="-1"></a>idh_distritos_2019 <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;data/idh_distritos_2019.xlsx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="idh.html#cb5-1" aria-hidden="true" tabindex="-1"></a>idh_talara <span class="ot">&lt;-</span> idh_distritos_2019 <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="idh.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>( Distrito <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;El Alto&quot;</span>, <span class="st">&quot;La Brea&quot;</span>, <span class="st">&quot;Lobitos&quot;</span>, <span class="st">&quot;Los Organos&quot;</span>, <span class="st">&quot;Mancora&quot;</span>, <span class="st">&quot;Pariñas&quot;</span>)) <span class="sc">%&gt;%</span>   </span>
+<span id="cb5-3"><a href="idh.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Distrito, IDH, habitantes) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="idh.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Distrito =</span> <span class="fu">str_to_upper</span>(Distrito)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a href="idh.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DISTRITO =</span> Distrito) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-6"><a href="idh.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">&quot;IDH&quot;</span>, <span class="st">&quot;DISTRITO&quot;</span>, <span class="st">&quot;habitantes&quot;</span>)</span></code></pre></div>
+<!-- TODO: Aquí tienes una tabla que no aclaras por qué es necesario mostrarla. Acompáñala de alguna explicación o retírala -->
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="idh.html#cb6-1" aria-hidden="true" tabindex="-1"></a>idh_talara <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="idh.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(DISTRITO, IDH)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="idh.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="idh.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-5"><a href="idh.html#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;IDH Talara&quot;</span>,</span>
+<span id="cb6-6"><a href="idh.html#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Según distritos&quot;</span>,</span>
+<span id="cb6-7"><a href="idh.html#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Distritos&quot;</span>,</span>
+<span id="cb6-8"><a href="idh.html#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;IDH&quot;</span></span>
+<span id="cb6-9"><a href="idh.html#cb6-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="idh.html#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_base</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>A continuación, analizaremos el número de habitantes según distritos en la provincia de Talara.</p>
+<p>Como se muestra en la figura, el distrito con mayor número de habitantes es Pariñas (89,997 personas), seguido de Máncora y La Brea, con 14,044 y 10,993 habitantes respectivamente.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="idh.html#cb7-1" aria-hidden="true" tabindex="-1"></a>idh_talara_hab <span class="ot">&lt;-</span> idh_distritos_2019 <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="idh.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Distrito, habitantes) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="idh.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">c</span>(</span>
+<span id="cb7-4"><a href="idh.html#cb7-4" aria-hidden="true" tabindex="-1"></a>    Distrito <span class="sc">%in%</span> <span class="fu">c</span>(</span>
+<span id="cb7-5"><a href="idh.html#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;El Alto&quot;</span>,</span>
+<span id="cb7-6"><a href="idh.html#cb7-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;La Brea&quot;</span>,</span>
+<span id="cb7-7"><a href="idh.html#cb7-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Lobitos&quot;</span>,</span>
+<span id="cb7-8"><a href="idh.html#cb7-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Los Organos&quot;</span>,</span>
+<span id="cb7-9"><a href="idh.html#cb7-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Mancora&quot;</span>,</span>
+<span id="cb7-10"><a href="idh.html#cb7-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Pariñas&quot;</span></span>
+<span id="cb7-11"><a href="idh.html#cb7-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-12"><a href="idh.html#cb7-12" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb7-13"><a href="idh.html#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(habitantes))</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="idh.html#cb8-1" aria-hidden="true" tabindex="-1"></a>idh_talara_hab <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="idh.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Distrito, habitantes)) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="idh.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="idh.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Habitantes&quot;</span>,</span>
+<span id="cb8-5"><a href="idh.html#cb8-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Según distritos&quot;</span>,</span>
+<span id="cb8-6"><a href="idh.html#cb8-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Distritos&quot;</span>,</span>
+<span id="cb8-7"><a href="idh.html#cb8-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Habitantes&quot;</span>)  <span class="sc">+</span></span>
+<span id="cb8-8"><a href="idh.html#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_base</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>En lo que respecta a nivel de ingresos, podemos observar que el distrito con mayor nivel de ingreso familiar per cápita es Lobito (1,021 soles), seguido de Pariñas (1,000 soles). Los distritos con menor nivel de ingresos en la provincia son La Brea y Los Órganos, con 895 y 984 soles respectivamente.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="idh.html#cb9-1" aria-hidden="true" tabindex="-1"></a>idh_talara_ing <span class="ot">&lt;-</span> idh_distritos_2019 <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="idh.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Distrito, ing_fam_pc) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="idh.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">c</span>(</span>
+<span id="cb9-4"><a href="idh.html#cb9-4" aria-hidden="true" tabindex="-1"></a>    Distrito <span class="sc">%in%</span> <span class="fu">c</span>(</span>
+<span id="cb9-5"><a href="idh.html#cb9-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;El Alto&quot;</span>,</span>
+<span id="cb9-6"><a href="idh.html#cb9-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;La Brea&quot;</span>,</span>
+<span id="cb9-7"><a href="idh.html#cb9-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Lobitos&quot;</span>,</span>
+<span id="cb9-8"><a href="idh.html#cb9-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Los Organos&quot;</span>,</span>
+<span id="cb9-9"><a href="idh.html#cb9-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Mancora&quot;</span>,</span>
+<span id="cb9-10"><a href="idh.html#cb9-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Pariñas&quot;</span></span>
+<span id="cb9-11"><a href="idh.html#cb9-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-12"><a href="idh.html#cb9-12" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb9-13"><a href="idh.html#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(ing_fam_pc))</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="idh.html#cb10-1" aria-hidden="true" tabindex="-1"></a>idh_talara_ing <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="idh.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Distrito, ing_fam_pc)) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="idh.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="idh.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-5"><a href="idh.html#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Ingreso Familiar per Cápita&quot;</span>,</span>
+<span id="cb10-6"><a href="idh.html#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Según distritos&quot;</span>,</span>
+<span id="cb10-7"><a href="idh.html#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Distritos&quot;</span>,</span>
+<span id="cb10-8"><a href="idh.html#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Ingresos&quot;</span></span>
+<span id="cb10-9"><a href="idh.html#cb10-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="idh.html#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_base</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<!-- TODO: La creación de covid talara, idh_talara_full, talara_idh_covid, también debe ir en la sección "Conjuntos de datos usados" explicando muy brevemente en qué consiste el código de la limpieza o cálculo-->
+<p>Ahora crearemos nuestro conjunto de datos que contiene información sobre COVID e IDH en una sola base para analizar la relación de los casos de COVID con el IDH, y adicionalmente con el número de habitantes y el nivel de ingreso familiar para observar su comportamiento.</p>
+<p>Para lo anterior, creamos unimos nuestra base de COVID Talara que contiene los casos positivos de COVID para la provincia, con la base de IDH distrital de Talara. Como resultado obtenemos una sola base con información sobre COVID, IDH, población y nivel de ingresos per capita que son nuestras variables de interés.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="idh.html#cb11-1" aria-hidden="true" tabindex="-1"></a>covid_talara <span class="ot">&lt;-</span> positivos_covid <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="idh.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(FECHA_RESULTADO, PROVINCIA, DISTRITO, SEXO, EDAD) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="idh.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> (PROVINCIA <span class="sc">==</span> <span class="st">&quot;TALARA&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="idh.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(DISTRITO) <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="idh.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_casos =</span> <span class="fu">n</span>()) </span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="idh.html#cb12-1" aria-hidden="true" tabindex="-1"></a>idh_talara_full <span class="ot">&lt;-</span> idh_distritos_2019 <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="idh.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Distrito <span class="sc">%in%</span> <span class="fu">c</span>(</span>
+<span id="cb12-3"><a href="idh.html#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;El Alto&quot;</span>,</span>
+<span id="cb12-4"><a href="idh.html#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;La Brea&quot;</span>,</span>
+<span id="cb12-5"><a href="idh.html#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Lobitos&quot;</span>,</span>
+<span id="cb12-6"><a href="idh.html#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Los Organos&quot;</span>,</span>
+<span id="cb12-7"><a href="idh.html#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Mancora&quot;</span>,</span>
+<span id="cb12-8"><a href="idh.html#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Pariñas&quot;</span></span>
+<span id="cb12-9"><a href="idh.html#cb12-9" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb12-10"><a href="idh.html#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Distrito, IDH, habitantes, ing_fam_pc) <span class="sc">%&gt;%</span></span>
+<span id="cb12-11"><a href="idh.html#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Distrito =</span> <span class="fu">str_to_upper</span>(Distrito)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-12"><a href="idh.html#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DISTRITO =</span> Distrito) <span class="sc">%&gt;%</span></span>
+<span id="cb12-13"><a href="idh.html#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">&quot;IDH&quot;</span>, <span class="st">&quot;DISTRITO&quot;</span>, <span class="st">&quot;habitantes&quot;</span>, <span class="st">&quot;ing_fam_pc&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="idh.html#cb13-1" aria-hidden="true" tabindex="-1"></a>idh_talara_full</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-15">Tabla 1.1: </span>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+IDH
+</th>
+<th style="text-align:left;">
+DISTRITO
+</th>
+<th style="text-align:right;">
+habitantes
+</th>
+<th style="text-align:right;">
+ing_fam_pc
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.5901151
+</td>
+<td style="text-align:left;">
+PARIÑAS
+</td>
+<td style="text-align:right;">
+89997.358
+</td>
+<td style="text-align:right;">
+1000.6892
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.5751392
+</td>
+<td style="text-align:left;">
+EL ALTO
+</td>
+<td style="text-align:right;">
+7348.017
+</td>
+<td style="text-align:right;">
+929.1954
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.5876647
+</td>
+<td style="text-align:left;">
+LA BREA
+</td>
+<td style="text-align:right;">
+10993.186
+</td>
+<td style="text-align:right;">
+895.6171
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.5921873
+</td>
+<td style="text-align:left;">
+LOBITOS
+</td>
+<td style="text-align:right;">
+1552.580
+</td>
+<td style="text-align:right;">
+1020.6190
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.5629466
+</td>
+<td style="text-align:left;">
+LOS ORGANOS
+</td>
+<td style="text-align:right;">
+9569.769
+</td>
+<td style="text-align:right;">
+894.3106
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.5613902
+</td>
+<td style="text-align:left;">
+MANCORA
+</td>
+<td style="text-align:right;">
+14044.606
+</td>
+<td style="text-align:right;">
+905.3640
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="idh.html#cb14-1" aria-hidden="true" tabindex="-1"></a>covid_talara</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-16">Tabla 1.2: </span>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+DISTRITO
+</th>
+<th style="text-align:right;">
+total_casos
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+EL ALTO
+</td>
+<td style="text-align:right;">
+289
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LA BREA
+</td>
+<td style="text-align:right;">
+515
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LOBITOS
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LOS ORGANOS
+</td>
+<td style="text-align:right;">
+518
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MANCORA
+</td>
+<td style="text-align:right;">
+690
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PARIÑAS
+</td>
+<td style="text-align:right;">
+3223
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="idh.html#cb15-1" aria-hidden="true" tabindex="-1"></a>talara_idh_covid <span class="ot">&lt;-</span> covid_talara <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="idh.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(idh_talara_full)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="idh.html#cb16-1" aria-hidden="true" tabindex="-1"></a>talara_idh_covid </span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-18">Tabla 1.3: </span>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+DISTRITO
+</th>
+<th style="text-align:right;">
+total_casos
+</th>
+<th style="text-align:right;">
+IDH
+</th>
+<th style="text-align:right;">
+habitantes
+</th>
+<th style="text-align:right;">
+ing_fam_pc
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+EL ALTO
+</td>
+<td style="text-align:right;">
+289
+</td>
+<td style="text-align:right;">
+0.5751392
+</td>
+<td style="text-align:right;">
+7348.017
+</td>
+<td style="text-align:right;">
+929.1954
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LA BREA
+</td>
+<td style="text-align:right;">
+515
+</td>
+<td style="text-align:right;">
+0.5876647
+</td>
+<td style="text-align:right;">
+10993.186
+</td>
+<td style="text-align:right;">
+895.6171
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LOBITOS
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+0.5921873
+</td>
+<td style="text-align:right;">
+1552.580
+</td>
+<td style="text-align:right;">
+1020.6190
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LOS ORGANOS
+</td>
+<td style="text-align:right;">
+518
+</td>
+<td style="text-align:right;">
+0.5629466
+</td>
+<td style="text-align:right;">
+9569.769
+</td>
+<td style="text-align:right;">
+894.3106
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MANCORA
+</td>
+<td style="text-align:right;">
+690
+</td>
+<td style="text-align:right;">
+0.5613902
+</td>
+<td style="text-align:right;">
+14044.606
+</td>
+<td style="text-align:right;">
+905.3640
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PARIÑAS
+</td>
+<td style="text-align:right;">
+3223
+</td>
+<td style="text-align:right;">
+0.5901151
+</td>
+<td style="text-align:right;">
+89997.358
+</td>
+<td style="text-align:right;">
+1000.6892
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="resultados" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Resultados</h2>
+<p>A continuación analizaremos el IDH con el número de casos positivos de COVID como porcentaje de la población total y el nivel de ingresos familiares per cápita.</p>
+<p>En la Figura 5 se observa que distritos con menor IDH tienen mayor número de casos COVID como porcentaje de la población total (Los Órganos y Máncora). Asimismo, se observa que si bien Pariñas, tiene el mayor número de casos totales de COVID-19 en la provincia, como porcentaje de su población, es menor en comparación con los demás distritos, siendo que ademas posee el IDH más alto en comparación con otros distritos.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="idh.html#cb17-1" aria-hidden="true" tabindex="-1"></a>talara_idh_covid <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="idh.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">porccasosporhab =</span> total_casos <span class="sc">/</span> habitantes <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="idh.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(IDH, porccasosporhab)) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="idh.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-5"><a href="idh.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> DISTRITO)) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="idh.html#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lims</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="fl">0.559</span>, <span class="fl">0.595</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="fl">3.2</span>, <span class="fl">5.7</span>))<span class="sc">+</span></span>
+<span id="cb17-7"><a href="idh.html#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-8"><a href="idh.html#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;IDH y Porcentaje de casos COVID-19&quot;</span>,</span>
+<span id="cb17-9"><a href="idh.html#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Según distritos&quot;</span>,</span>
+<span id="cb17-10"><a href="idh.html#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;IDH&quot;</span>,</span>
+<span id="cb17-11"><a href="idh.html#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;% de habitantes contagiados de COVID-19&quot;</span></span>
+<span id="cb17-12"><a href="idh.html#cb17-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-13"><a href="idh.html#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_base</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Similarmente, se observa que en lo que respecta al nivel de Ingresos familiares per cápita, aquellos distritos con mayores ingresos como Lobitos y Pariñas, presentan menores casos de COVID-19 por habitantes, a excepción de El Alto, que con un ingreso familiar menor que los distritos más ricos, presenta incluso menor tasa de casos positivos que el distrito de Lobitos.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="idh.html#cb18-1" aria-hidden="true" tabindex="-1"></a>talara_idh_covid <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="idh.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">porccasosporhab =</span> total_casos <span class="sc">/</span> habitantes <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="idh.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(ing_fam_pc, porccasosporhab)) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="idh.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb18-5"><a href="idh.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> DISTRITO)) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="idh.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lims</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">875</span>, <span class="dv">1025</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="fl">3.2</span>, <span class="fl">5.7</span>))<span class="sc">+</span></span>
+<span id="cb18-7"><a href="idh.html#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-8"><a href="idh.html#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Ingresos familiares per cápita y Porcentaje de casos COVID-19 por habitantes&quot;</span>,</span>
+<span id="cb18-9"><a href="idh.html#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Según distritos&quot;</span>,</span>
+<span id="cb18-10"><a href="idh.html#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Ingresos fam. per cápita&quot;</span>,</span>
+<span id="cb18-11"><a href="idh.html#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Total casos COVID-19 por habitantes&quot;</span></span>
+<span id="cb18-12"><a href="idh.html#cb18-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-13"><a href="idh.html#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_base</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+<div id="conclusiones" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Conclusiones</h2>
+<p>Efectivamente, pareciera ser que el nivel de desarrollo humano, y en este caso, el nivel de ingresos familiar per cápita explican el menor número de casos positivos de COVID-19 en los distritos de la provincia de Talara, siendo que aquellos distritos con mayor IDH y nivel de ingresos registran menor número de casos COVID-19 como porcentaje de la población total.</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p><a href="https://www1.undp.org/content/undp/es/home/news-centre/news/2020/COVID19_Human_development_on_course_to_decline_for_the_first_time_since_1990.html" class="uri">https://www1.undp.org/content/undp/es/home/news-centre/news/2020/COVID19_Human_development_on_course_to_decline_for_the_first_time_since_1990.html</a><a href="idh.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>El Reto de la Igualdad. Una lectura de las dinámicas territoriales en el Perú. En: <a href="https://www.pe.undp.org/content/peru/es/home/library/poverty/el-reto-de-la-igualdad.html" class="uri">https://www.pe.undp.org/content/peru/es/home/library/poverty/el-reto-de-la-igualdad.html</a><a href="idh.html#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sobre-los-autores.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="saludcovid.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["grupo_2021_mayo_junio.pdf", "grupo_2021_mayo_junio.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

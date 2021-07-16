@@ -28,9 +28,13 @@ A través del desarrollo de sesiones que combinaron teoría y práctica, se espe
 
 -   Elaboración de reportes de análisis de datos usando R Markdown
 
-Como se podrá apreciar en los capítulos que componen esta compilación, los participantes lograron alcanzar los aprendizajes esperados. Sin embargo, sí debo manifestar como aprendizaje propio que debió hacerse mayor hincapié en el desarrollo de habilidades de limpieza y ordenamiento de datos.
+Como se podrá apreciar en los capítulos que componen esta compilación, los participantes lograron alcanzar los aprendizajes esperados. Sin embargo, sí debo manifestar como aprendizaje propio (para mí) que debió hacerse mayor hincapié en el desarrollo de habilidades de limpieza y ordenamiento de datos.
 
-Las presentaciones y ejercicios resueltos de las sesiones se encuentran en [mi perfil de Rpubs.com](https://rpubs.com/scalderon). También es posible acceder al [repositorio en Github]() de este libro digital.
+Las presentaciones y ejercicios resueltos de las sesiones se encuentran en [mi perfil de Rpubs.com](https://rpubs.com/scalderon). También es posible acceder al [repositorio en Github](https://github.com/calderonsamuel/grupo_2021_mayo_junio) de este libro digital.
+
+A quien lea esta compilación le hago recordar que los trabajos son realizados por personas que están en proceso de afianzar sus habilidades escribiendo código en R. Es posible que encuentren algunos bloques de código que se podían escribir mejor, pero he preferido mantener esas imperfecciones para que en el futuro las personas que escribieron el código puedan medir su progreso.
+
+*Samuel Calderon*
 
 # Sobre los autores {.unnumbered}
 
