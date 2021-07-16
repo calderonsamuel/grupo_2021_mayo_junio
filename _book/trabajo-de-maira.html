@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 2 Trabajo de Maira | Elaboración de productos de datos: Reportes con R Markdown</title>
+  <meta name="description" content="Este libro es una compilación de reportes individuales trabajados durante mayo y junio del 2021 en el Taller de Elaboración de productos de datos dictado por Samuel Calderon." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 2 Trabajo de Maira | Elaboración de productos de datos: Reportes con R Markdown" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Este libro es una compilación de reportes individuales trabajados durante mayo y junio del 2021 en el Taller de Elaboración de productos de datos dictado por Samuel Calderon." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 2 Trabajo de Maira | Elaboración de productos de datos: Reportes con R Markdown" />
+  
+  <meta name="twitter:description" content="Este libro es una compilación de reportes individuales trabajados durante mayo y junio del 2021 en el Taller de Elaboración de productos de datos dictado por Samuel Calderon." />
+  
+
+<meta name="author" content="Samuel Calderon, Felipe Bedoya, Maira Chamota, Jennifer Ponce, Nelly Reyes, Almendra Rodriguez" />
+
+
+<meta name="date" content="2021-07-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="trabajo-de-felipe.html"/>
+<link rel="next" href="eleccionesSJL.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Elaboración de productos de datos: Reportes con R Markdown</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html"><i class="fa fa-check"></i>Sobre los autores</a>
+<ul>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#felipe-bedoya"><i class="fa fa-check"></i>Felipe Bedoya</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#maira-chamota"><i class="fa fa-check"></i>Maira Chamota</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#jennifer-ponce"><i class="fa fa-check"></i>Jennifer Ponce</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#nelly-reyes"><i class="fa fa-check"></i>Nelly Reyes</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#almendra-rodriguez"><i class="fa fa-check"></i>Almendra Rodriguez</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#samuel-calderon"><i class="fa fa-check"></i>Samuel Calderon</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html"><i class="fa fa-check"></i><b>1</b> Trabajo de Felipe</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#introducción"><i class="fa fa-check"></i><b>1.1</b> Introducción</a></li>
+<li class="chapter" data-level="1.2" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#paquetes-usados"><i class="fa fa-check"></i><b>1.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="1.3" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#conjuntos-de-datos-usados"><i class="fa fa-check"></i><b>1.3</b> Conjuntos de datos usados</a></li>
+<li class="chapter" data-level="1.4" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#resultados"><i class="fa fa-check"></i><b>1.4</b> Resultados</a></li>
+<li class="chapter" data-level="1.5" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#conclusiones"><i class="fa fa-check"></i><b>1.5</b> Conclusiones</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html"><i class="fa fa-check"></i><b>2</b> Trabajo de Maira</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#introducción-1"><i class="fa fa-check"></i><b>2.1</b> Introducción</a></li>
+<li class="chapter" data-level="2.2" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#paquetes-usados-1"><i class="fa fa-check"></i><b>2.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="2.3" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#conjuntos-de-datos-usados-1"><i class="fa fa-check"></i><b>2.3</b> Conjuntos de datos usados</a></li>
+<li class="chapter" data-level="2.4" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#resultados-1"><i class="fa fa-check"></i><b>2.4</b> Resultados</a></li>
+<li class="chapter" data-level="2.5" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#conclusiones-1"><i class="fa fa-check"></i><b>2.5</b> Conclusiones</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html"><i class="fa fa-check"></i><b>3</b> Una primera mirada a últimas cinco elecciones municipales de San Juan de Lurigancho desde el 2002 hasta el 2018</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#introducción-2"><i class="fa fa-check"></i><b>3.1</b> Introducción</a></li>
+<li class="chapter" data-level="3.2" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#paquetes-usados-2"><i class="fa fa-check"></i><b>3.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="3.3" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#conjuntos-de-datos-usados-2"><i class="fa fa-check"></i><b>3.3</b> Conjuntos de datos usados</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#autoridades-distritales-cinco-elecciones-municipales-2002-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.1</b> Autoridades Distritales: Cinco Elecciones Municipales 2002, 2006, 2010, 2014, 2018</a></li>
+<li class="chapter" data-level="3.3.2" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#candidatos-distritales-cinco-elecciones-municipales-2002-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.2</b> Candidatos Distritales: Cinco Elecciones Municipales 2002, 2006, 2010, 2014, 2018</a></li>
+<li class="chapter" data-level="3.3.3" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#extranyendo-la-información-sobre-san-juan-de-lurigancho-autoridades-municipales-2002-2006-2010-2014-y-2018"><i class="fa fa-check"></i><b>3.3.3</b> Extranyendo la información sobre San Juan de Lurigancho: Autoridades municipales 2002, 2006, 2010, 2014 y 2018</a></li>
+<li class="chapter" data-level="3.3.4" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#sobre-la-base-2018"><i class="fa fa-check"></i><b>3.3.4</b> Sobre la base 2018</a></li>
+<li class="chapter" data-level="3.3.5" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#una-sola-base-autoridades-municipales-sjl-2002-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.5</b> Una sola base: Autoridades Municipales SJL 2002, 2006, 2010, 2014, 2018</a></li>
+<li class="chapter" data-level="3.3.6" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#extrayendo-la-información-disponible-sobre-la-base-de-candidatos-distritales-elecciones-2002-2004-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.6</b> Extrayendo la información disponible sobre la Base de Candidatos Distritales: elecciones 2002, 2004, 2006, 2010, 2014, 2018</a></li>
+<li class="chapter" data-level="3.3.7" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#una-sola-base-candidatos-distritales-sjl-2002-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.7</b> Una sola base: Candidatos Distritales SJL 2002, 2006, 2010, 2014, 2018</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#resultados-1-1"><i class="fa fa-check"></i><b>3.4</b> RESULTADOS 1 :</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#el-número-de-votos-y-porcentaje-de-votación-de-los-alcaldes-ganadores-por-año-electoral"><i class="fa fa-check"></i><b>3.4.1</b> El número de votos y porcentaje de votación de los alcaldes ganadores por año electoral</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#resultados-2"><i class="fa fa-check"></i><b>3.5</b> RESULTADOS 2:</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#evolución-del-número-y-tipo-de-organización-política-por-año-electoral"><i class="fa fa-check"></i><b>3.5.1</b> Evolución del número y tipo de organización política por año electoral</a></li>
+<li class="chapter" data-level="3.5.2" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#la-evolución-del-número-de-organizaciones-políticas-por-año-electoral"><i class="fa fa-check"></i><b>3.5.2</b> La evolución del número de organizaciones políticas por año electoral</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#conclusiones-2"><i class="fa fa-check"></i><b>3.6</b> Conclusiones</a></li>
+<li class="chapter" data-level="3.7" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#referencias"><i class="fa fa-check"></i><b>3.7</b> Referencias</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html"><i class="fa fa-check"></i><b>4</b> Midiendo el pulso de la democracia en el Perú, 2008 - 2019</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#introducción-3"><i class="fa fa-check"></i><b>4.1</b> Introducción</a></li>
+<li class="chapter" data-level="4.2" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#paquetes-usados-3"><i class="fa fa-check"></i><b>4.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="4.3" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#conjunto-de-datos"><i class="fa fa-check"></i><b>4.3</b> Conjunto de datos</a></li>
+<li class="chapter" data-level="4.4" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#resultados-3"><i class="fa fa-check"></i><b>4.4</b> Resultados</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#desapego-democrático-el-apoyo-y-la-satisfacción-con-la-democracia-en-franco-descenso"><i class="fa fa-check"></i><b>4.4.1</b> Desapego democrático: El apoyo y la satisfacción con la democracia en franco descenso</a></li>
+<li class="chapter" data-level="4.4.2" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#satisfacción-con-la-democracia-perú-2008---2019"><i class="fa fa-check"></i><b>4.4.2</b> Satisfacción con la democracia, Perú 2008 - 2019</a></li>
+<li class="chapter" data-level="4.4.3" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#apoyo-a-la-democracia-perú-2008---2019"><i class="fa fa-check"></i><b>4.4.3</b> Apoyo a la democracia, Perú 2008 - 2019</a></li>
+<li class="chapter" data-level="4.4.4" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#existe-relación-entre-el-apoyo-y-la-satifacción-con-la-democracia-en-el-perú"><i class="fa fa-check"></i><b>4.4.4</b> ¿Existe relación entre el apoyo y la satifacción con la democracia en el Perú?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#conclusiones-3"><i class="fa fa-check"></i><b>4.5</b> Conclusiones</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#la-democracia-en-el-perú-pierde-seguidores"><i class="fa fa-check"></i><b>4.5.1</b> La democracia en el Perú pierde seguidores</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#referencias-1"><i class="fa fa-check"></i><b>4.6</b> Referencias</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="orgJuveniles.html"><a href="orgJuveniles.html"><i class="fa fa-check"></i><b>5</b> Algunos reportes respecto a las organizaciones juveniles a partir del Registro Nacional de Municipalidades - RENAMU 2020 y 2019</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="orgJuveniles.html"><a href="orgJuveniles.html#paquetes-usados-4"><i class="fa fa-check"></i><b>5.1</b> Paquetes usados</a></li>
+<li class="chapter" data-level="5.2" data-path="orgJuveniles.html"><a href="orgJuveniles.html#conjuntos-de-datos-usados-3"><i class="fa fa-check"></i><b>5.2</b> Conjuntos de datos usados</a></li>
+<li class="chapter" data-level="5.3" data-path="orgJuveniles.html"><a href="orgJuveniles.html#resultados-4"><i class="fa fa-check"></i><b>5.3</b> Resultados</a></li>
+<li class="chapter" data-level="5.4" data-path="orgJuveniles.html"><a href="orgJuveniles.html#algunas-conclusiones"><i class="fa fa-check"></i><b>5.4</b> Algunas conclusiones</a></li>
+<li class="chapter" data-level="5.5" data-path="orgJuveniles.html"><a href="orgJuveniles.html#referencias-2"><i class="fa fa-check"></i><b>5.5</b> Referencias</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elaboración de productos de datos: Reportes con R Markdown</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="trabajo-de-maira" class="section level1" number="2">
+<h1><span class="header-section-number">Capítulo 2</span> Trabajo de Maira</h1>
+<div id="introducción-1" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Introducción</h2>
+<p>Descripción del tema central del trabajo (¿qué pregunta quiero responder?¿qué preguntas necesito responder previamente?)</p>
+</div>
+<div id="paquetes-usados-1" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Paquetes usados</h2>
+<p>Descripción del aporte de cada paquete usado (¿qué funciones/operaciones me permite realizar?)</p>
+</div>
+<div id="conjuntos-de-datos-usados-1" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Conjuntos de datos usados</h2>
+<p>Descripción de cada conjunto de datos (¿qué variables contiene?¿quién recoge la información contenida allí?) y su aporte al trabajo (¿qué pregunta me permite responder?).</p>
+<p>En caso se haya hecho una limpieza u ordenamiento de los datos, explicar el código utilizado.</p>
+</div>
+<div id="resultados-1" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Resultados</h2>
+<p>Usar bloques de código para obtener respuestas a mis preguntas</p>
+<p>Antes de cada bloque explicar en lenguaje no técnico qué hace el bloque de código (¿qué operación estoy realizando?¿para qué quiero obtener esto?)</p>
+<p>Si mi bloque tiene como resultado una tabla o gráfico debo explicar brevemente el resultado. Si mi bloque tiene como resultado la creación de un objeto en el environment, no es necesario explicar el resultado.</p>
+</div>
+<div id="conclusiones-1" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Conclusiones</h2>
+<p>Las respuestas obtenidas de las preguntas planteadas en la introducción.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="trabajo-de-felipe.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="eleccionesSJL.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["grupo_2021_mayo_junio.pdf", "grupo_2021_mayo_junio.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,433 @@
+---
+output: bookdown::html_document2()
+---
+
+
+# Midiendo el pulso de la democracia: Perú 2008 - 2019
+
+*Almendra Rodriguez*
+
+```{r setup}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = TRUE)
+```
+
+
+<!-- CHANGED: He cambiado el nivel de los encabezados y retirado la numeración. R lo generará automáticamente-->
+
+## Introducción
+<!-- Descripción del tema central del trabajo (¿qué pregunta quiero responder?¿qué preguntas necesito responder previamente?) -->
+
+La democracia constituye uno de los principios de organización sobre los cuales actúa el Estado (Mariani, 2008). En el presente trabajo se entiende a la democracia como “una forma de organización del poder en la sociedad con el objetivo de ampliar la ciudadanía, evitar o limitar la dominación de individuos o grupos que impidan este objetivo y lograr la perdurabilidad de la organización democrática” (O’Donnell, 2004, p. 22). Para ello, la democracia necesita de un Estado que la establezca como una forma de ciudadanía universal (Mariani, 2008), sin embargo, en América Latina este requisito constituye uno de los déficits democráticos.
+
+<!-- TODO: En el siguiente párrafo debes indicar la fuente de esas afirmaciones. Sería algo tipo: "Según X, en el Perú, dos de cada tres consultados (...) -->
+
+En efecto, de acuerdo con estudios nacionales e internacionales, la democracia en América Latina afronta diversos problemas que amenazan la calidad del funcionamiento o, incluso, la propia supervivencia del régimen democrático. En el Perú, dos de cada tres consultados (66,3%) cree que su país es una democracia. Este es el segundo valor más alto, tras Paraguay (67,3%). Asimismo, dada la conexión entre el estado de la opinión pública y la estabilidad democrática, el estancamiento del apoyo a la democracia en la región en general, y en Perú en particular, es preocupante (Carrión et al 2020).Cabe destacar que esto es preocupante porque la conjunción de dos aspectos como la satisfacción y el apoyo a la democracia se podrían traducir en el apoyo a autoritarismos y la búsqueda de vías no democráticas para alcanzar el poder.
+
+Por ello, a través del uso de encuestas de cultura política se pretende aproximar a un diágnostico del estado de la democracia en el Perú en torno a su satisfacción y apoyo. Así, la pregunta de investigación que orienta este proyecto es la siguiente: ¿Cómo ha ido variando la satisfacción y el apoyo hacia la democracia durante el periodo 2008 - 2019? 
+
+En función a ello, primero se exploran cada uno de los resultados bianuales desde el año 2008 hasta el 2019 y se complementa a través de un análisis longitudinal para cada una de las dos variables de estudio. Posteriomente, se presenta un gráfico de dispersión para observar la relación entre ambas variables: la satisfacción con la democracia y el apoyo a la democracia. 
+
+## Paquetes usados
+
+<!-- Descripción del aporte de cada paquete usado (¿qué funciones/operaciones me permite realizar?) -->
+
+Con la finalidad de trabajar con las bases de datos, en primer lugar se cargan tres paquetes: tidyverse, haven, ggplot2. Si bien haven permite leer base de datos .sav y .dta que es el tipo de archivo en el cual se encuentran las bases de datos de LAPOP, en el caso de tidyverse se usa para la limpieza de datos con dplyr de modo que sea más útil para el análisis y la  manipulación de data frames. Asimismo, para el análisis y la exploración descriptiva de gráficos se utiliza ggplot2. 
+
+```{r}
+library(tidyverse)
+library(haven)
+library(ggplot2)
+```
+
+## Conjunto de datos 
+
+<!-- Descripción de cada conjunto de datos (¿qué variables contiene?¿quién recoge la información contenida allí?) y su aporte al trabajo (¿qué pregunta me permite responder?). En caso se haya hecho una limpieza u ordenamiento de los datos, explicar el código utilizado. -->
+
+Las base de datos con respecto a la cultura política que permite medir diversas variables relacionadas a la democracia se encuentran como parte del Proyecto de Opinión Pública de América Latina (LAPOP) en el siguiente link: http://datasets.americasbarometer.org/database/index.php#
+
+Este proyecto consiste en un estudio bianual que analiza desde distintas perspectivas la cultura política y la democrática de los países del continente.Así, la base de datos del Barómetro de las Américas contribuye en las discusiones y debates con respecto a  la calidad y la fortaleza de la democracia en la región, y en específico, en el Perú desde el año de su medición: 2006. Como “barómetro”, el proyecto ofrece insumos importantes sobre las tendencias a largo plazo que permiten identificar retrocesos democráticos y resaltar las mejoras en las normas y actitudes de la ciudadanía. 
+
+```{r}
+LAPOP_2008 <- read_sav("data/PERU_LAPOP_2008 final data.sav") %>% as_factor()
+LAPOP_2010 <- read_sav("data/PERU_LAPOP_2010 final data.sav") %>% as_factor()
+LAPOP_2012 <- read_sav("data/PERU_LAPOP_2012 final data.sav") %>% as_factor()
+LAPOP_2014 <- read_sav("data/PERU_LAPOP_2014 final data.sav") %>% as_factor()
+LAPOP_2017 <- read_dta("data/PERU_LAPOP_2017 final data.dta") %>% as_factor()
+LAPOP_2019 <- read_dta("data/PERU_LAPOP_2019 final data.dta") %>% as_factor()
+```
+
+Posterior a la exploración de las bases de datos, con la finalidad de brindar un adecuado análisis exporatorio resulta fundamental iniciar con la limpieza de datos seleccionando las variables elegidas: year, ing4 (apoyo a la democracia), pn4 (satisfacción con la democracia), wt (factor de expansión).
+
+Para ello, se estandarizó la variable wt como numérica con el fin de lograr trabajar con las  bases en conjunto. Cabe destacar que para las bases de datos del 2008 y 2010 se está considerado el valor 1 como wt. 
+
+Luego de crear con la función mutate el wt y la variable year, se seleccionan las variables elegidas para cada una de las bases de datos y posteriormente se crea la base de datos Democracia_subset que contiene las variables seleccionadas para el análisis: year, ing4,pn4,wt.
+
+```{r}
+DemocraciaPeru_2008 <- LAPOP_2008 %>%
+  mutate(wt=1) %>%
+  mutate(year = 2008) %>%
+  select(year,ing4,pn4,wt)
+```
+
+```{r}
+DemocraciaPeru_2010 <- LAPOP_2010 %>%
+  mutate(wt=1) %>%
+  mutate(year = 2010) %>%
+  select(year,ing4,pn4,wt)
+```
+
+```{r}
+DemocraciaPeru_2012 <-LAPOP_2012 %>%
+   mutate(year = 2012, wt = as.double(wt))%>%
+  select(year,ing4,pn4,wt)
+```
+
+```{r}
+DemocraciaPeru_2014 <-LAPOP_2014 %>%
+   mutate(year = 2014, wt = as.double(wt))%>%
+  select(year,ing4,pn4,wt)
+```
+
+En la base de datos del año 2017 hay una muestra original LAPOP (1530) y una sobremuestra (1.117). Para efectos de este proyecto, solo se filtra la muestra original LAPOP que contiene 1530 observaciones de las 4 variables seleccionadas. 
+
+```{r}
+DemocraciaPeru_2017 <-LAPOP_2017 %>%
+  filter(sobremuestra == 0)%>%
+  mutate(year = 2017, wt = as.double(wt))%>%
+  select(year,ing4,pn4,wt)
+```
+
+```{r}
+DemocraciaPeru_2019 <-LAPOP_2019 %>%
+  mutate(year = 2019, wt = as.double(wt))%>%
+  select(year,ing4,pn4,wt)
+```
+
+A continuación,luego de limpiar y crear como objeto las bases de datos por año en el environment, se procede a juntar las filas seleccionadas de todas las bases de datos desde el año 2008 hasta el 2019 en una sola: Democracia_subset. Para ello, se utiliza la función bind_rows.
+
+```{r}
+Democracia_subset<-bind_rows(DemocraciaPeru_2008,DemocraciaPeru_2010,
+                             DemocraciaPeru_2012,DemocraciaPeru_2014,DemocraciaPeru_2017,
+                             DemocraciaPeru_2019)
+```
+
+Previo al análisis de los resultados, resulta necesario explorar el conjunto de datos a usar para el análisis.
+
+```{r}
+Democracia_subset
+```
+A continuación, se observa la frecuencia de la primera variable seleccionada: el apoyo a la democracia (ing4). Asimismo, se presenta el porcentaje de apoyo a la democracia del total de encuestados teniendo en consideración el factor de expansión y excluyendo los valores perdidos (na.rm).
+
+```{r}
+Apoyo_democracia <-Democracia_subset %>%
+  group_by(year,ing4)%>%
+  summarise(apoyo_democracia = sum(wt,na.rm = TRUE))%>%
+  mutate(porcentaje = apoyo_democracia/sum(apoyo_democracia)*100)%>%
+  mutate(porcentaje = round (porcentaje, 1)) %>%
+  ungroup()
+```
+
+Del mismo modo, se realiza dicho procedimiento para la otra variable seleccionada: satisfacción con la democracia (pn4)
+
+```{r}
+Satisfaccion_democracia <- Democracia_subset %>%
+  group_by(year,pn4)%>%
+  summarise(satisfaccion_democracia = sum(wt,na.rm = TRUE))%>%
+  mutate(porcentaje = satisfaccion_democracia/sum(satisfaccion_democracia)*100)%>%
+  mutate(porcentaje = round (porcentaje, 1)) %>%
+  ungroup()
+```
+
+## Resultados
+
+<!-- Usar bloques de código para obtener respuestas a mis preguntas. Antes de cada bloque explicar en lenguaje no técnico qué hace el bloque de código (¿qué operación estoy realizando?¿para qué quiero obtener esto?). Si mi bloque tiene como resultado una tabla o gráfico debo explicar brevemente el resultado. Si mi bloque tiene como resultado la creación de un objeto en el environment, no es necesario explicar el resultado. -->
+
+Posterior a la limpieza de datos, a continuación se inicia con el análisis exploratorio de resultados tanto para la satisfacción, así como del apoyo hacia la democracia. 
+
+### Desapego democrático: El apoyo y la satisfacción con la democracia en franco descenso
+
+Considerando que el apoyo mayoritario de la ciudadanía hacia el gobierno democrático es una pieza fundamental para el mantenimiento del mismo (Linz y Stepan, 1996), desde su creación, el proyecto del Barómetro de las Américas ha realizado la siguiente pregunta con el fin de medir el apoyo a la democracia: 
+
+- ING4. Cambiando de nuevo el tema, puede que la democracia tenga problemas, pero es mejor que cualquier otra forma de gobierno. ¿Hasta qué punto está de acuerdo o en desacuerdo con esta frase?
+
+Por otro lado, la evaluación de la democracia contempla no solo el apoyo sostenido en una democracia electoral sino con el propósito de entender mejor el apoyo específico a la democracia en la región resulta importante conocer las percepciones de la ciudadanía sobre cómo funciona la democracia. Tal como se menciona en el informe del Barómetro de las Américas 2018/2019, "la satisfacción con la democracia y la condición de democracia del sistema político son importantes para entender el apoyo popular a la democracia, y sirven como base del compromiso ciudadano con ella, condición fundamental para la consolidación de la democracia" (Carrión et al 2020). En ese sentido, se ha realizado la siguiente pregunta sobre la satisfacción con la democracia:
+
+- PN4. En general, ¿usted diría que está muy satisfecho(a), satisfecho(a), insatisfecho(a) o muy insatisfecho(a) con la forma en que la democracia funciona en Perú?
+
+A continuación, se inicia la presentación de resultados de apoyo y satisfacción con la democracia para cada uno de los años de estudio desde el año más reciente, 2019, hasta la medición del año 2008. 
+
+Con respecto al apoyo a la democracia si tenemos en consideración que los entrevistados entregan una respuesta que va de 1 a 7, donde 1 significa “muy en desacuerdo” y 7 significa “muy de acuerdo”. En el siguiente gráfico, se observa que para el año 2019, las principales respuestas se concentran en el nivel 4 (26,6%) y 5(26,2%),respectivamente. Así, más del 50% de datos se ubican allí lo cual nos indica que hay un nivel de apoyo importante a la democracia. 
+
+```{r}
+Apoyo_democracia %>%
+  filter(year == "2019") %>%
+  select(year,ing4,porcentaje) %>%
+  ggplot(aes(porcentaje,ing4)) + 
+  geom_col(aes(fill = ing4)) +
+  labs(title = "Porcentaje de apoyo a la democracia 2019") +
+  labs(caption = "Fuente:LAPOP2019",x = "Porcentaje", y = "Apoyoalademocracia") +
+  geom_label(aes(label = porcentaje))
+```
+La satisfacción con la democracia “es un indicador del apoyo al desempeño del régimen democrático” (Linde y Eckman 2003, p. 399.). En efecto, si se tiene en cuenta que los entrevistados pueden dar una respuesta que va de 1 a 4, donde 1 significa “muy satisfecho”y 4 significa “muy insatisfecho”. Para el año 2019, se observa que la insatisfacción con la democracia supera el 70%, mientras que solo el 27,5% de los peruanos está satisfecho con el funcionamiento de la democracia en el Perú.
+
+```{r}
+Satisfaccion_democracia %>%
+  filter(year == "2019") %>%
+  select(pn4,porcentaje) %>%
+  ggplot(aes(porcentaje,pn4))  + 
+  geom_col(aes(fill = pn4 )) +
+  labs(title = "Porcentaje de satisfacción con la democracia 2019") +
+  labs(caption = "Fuente:LAPOP2019",x = "Porcentaje", y = "Sastifaccionconlademocracia") +
+  geom_label(aes(label = porcentaje))
+```
+El apoyo a la democracia en el año 2017 indica que las principales respuestas se concentran en el nivel 4 (24,4%) y 5(25%). Así, cerca del 50% de los datos se ubican en un nivel intermedio que evidencia un nivel de apoyo importante a la democracia. 
+
+```{r}
+Apoyo_democracia %>%
+  filter(year == "2017") %>%
+  select(year,ing4,porcentaje) %>%
+  ggplot(aes(porcentaje,ing4)) + 
+  geom_col(aes(fill = ing4)) +
+  labs(title = "Porcentaje de apoyo a la democracia 2017") +
+  labs(caption = "Fuente:LAPOP2017",x = "Porcentaje", y = "Apoyoalademocracia") +
+  geom_label(aes(label = porcentaje))
+```
+Con respecto a la sastifacción con la democracia para el año 2017, la insastisfacción con la democracia se encuentra se ubica en 69,8%, mientras que la satisfacción cerca al 28%; al igual que en el año 2019. 
+
+```{r}
+Satisfaccion_democracia %>%
+  filter(year == "2017") %>%
+  select(pn4,porcentaje) %>%
+  ggplot(aes(porcentaje,pn4))  + 
+  geom_col(aes(fill = pn4 )) +
+  labs(title = "Porcentaje de satisfacción con la democracia 2017") +
+  labs(caption = "Fuente:LAPOP2017",x = "Porcentaje", y = "Sastifaccionconlademocracia") +
+  geom_label(aes(label = porcentaje))
+```
+Para el año 2014, el porcentaje de apoyo a la democracia que incluye desde los valores 5 a 7 se ubica en 56,1%; es decir, más del 50% de peruanos estaba de acuerdo con el apoyo a la democracia en dicho año; a diferencia de las mediciones posteriores como en el 2017 y 2019 donde los valores no superan el 50% de apoyo a la democracia.
+
+```{r}
+Apoyo_democracia %>%
+  filter(year == "2014", !is.na(ing4)) %>%
+  select(year,ing4,porcentaje) %>%
+  ggplot(aes(porcentaje,ing4)) + 
+  geom_col(aes(fill = ing4)) +
+  labs(title = "Porcentaje de apoyo a la democracia 2014") +
+  labs(caption = "Fuente:LAPOP2014",x = "Porcentaje", y = "Apoyoalademocracia") +
+  geom_label(aes(label = porcentaje))
+```
+Al revisar la sastifacción con la democracia para el año 2014, se encuentra que el 59,3% estaba insatisfecho con la democracia, y más del 35% de peruanos se sentía satisfecho con su funcionamiento. Cabe destacar que esto nos evidencia la tendencia a decrecimiento sostenido de la satisfacción con la democracia, ya que para el 2017 y 2019, la satisfacción con la democracia por parte de los peruanos no supera el 30%. 
+
+```{r}
+Satisfaccion_democracia %>%
+  filter(year == "2014",!is.na(pn4)) %>%
+  select(pn4,porcentaje) %>%
+  ggplot(aes(pn4,porcentaje))  + 
+  geom_col(aes(fill = pn4 )) +
+  labs(title = "Porcentaje de satisfacción con la democracia 2014") +
+  labs(caption = "Fuente:LAPOP2014",x = "Porcentaje", y = "Sastifaccionconlademocracia") +
+  geom_label(aes(label = porcentaje)) 
+```
+En el año 2012, el porcentaje de apoyo a la democracia que incluye desde los valores 5 a 7 se ubica en 58,1%; es decir, cerca del 60% de peruanos estaba de acuerdo con el apoyo a la democracia en el 2012.
+
+```{r}
+Apoyo_democracia %>%
+  filter(year == "2012", !is.na(ing4)) %>%
+  select(year,ing4,porcentaje) %>%
+  ggplot(aes(porcentaje,ing4)) + 
+  geom_col(aes(fill = ing4)) + 
+  labs(title = "Porcentaje de apoyo a la democracia 2012") +
+  labs(caption = "Fuente:LAPOP2012",x = "Porcentaje", y = "Apoyoalademocracia") +
+  geom_label(aes(label = porcentaje))
+```
+Si se observa la sastifacción con la democracia para  dicho año, se encuentra que el 22,7% estaba insatisfecho con la democracia, y el 24.3% de peruanos se sentía satisfecho con la democracia. Al respecto, cabe destacar que en esta base de datos correspondiente al año 2012 hay un porcentaje significativo (53%) codificado como NA.
+
+```{r}
+Satisfaccion_democracia %>%
+  filter(year == "2012") %>%
+  select(pn4,porcentaje) %>%
+  ggplot(aes(porcentaje,pn4)) + 
+  geom_col(aes(fill = pn4 )) +
+  labs(title = "Porcentaje de satisfacción con la democracia 2012") +
+  labs(caption = "Fuente:LAPOP2012",x = "Porcentaje", y = "Sastifaccionconlademocracia") +
+  geom_label(aes(label = porcentaje))
+```
+Para el año 2010, el porcentaje de apoyo a la democracia que incluye desde los valores 5 a 7 se ubica en 49,7%; en otras palabras, cerca del 50% de peruanos estaba de acuerdo con el apoyo a la democracia en el 2010. Sin embargo, se encuentra un 46,2% de peruanos que no apoya la democracia como sistema político. 
+
+```{r}
+Apoyo_democracia %>%
+  filter(year == "2010", !is.na(ing4)) %>%
+  select(year,ing4,porcentaje) %>%
+  ggplot(aes(porcentaje,ing4)) + 
+  geom_col(aes(fill = ing4)) + 
+  labs(title = "Porcentaje de apoyo a la democracia 2010") +
+  labs(caption = "Fuente:LAPOP2010",x = "Porcentaje", y = "Apoyoalademocracia") +
+  geom_label(aes(label = porcentaje))
+```
+Al revisar la sastifacción con la democracia para el año 2010, se encuentra que solo el 37,5% de los peruanos estaba satisfecho con la democracia, mientras que en las categorías insatisfecho y muy insatisfecho se encuentran valores de 52,6% y 5,9%, respectivamente.
+
+```{r}
+Satisfaccion_democracia %>%
+  filter(year == "2010", !is.na(pn4)) %>%
+  select(pn4,porcentaje) %>%
+  ggplot(aes(pn4,porcentaje))  + 
+  geom_col(aes(fill = pn4 )) + 
+  labs(title = "Porcentaje de satisfacción con la democracia 2010") +
+  labs(caption = "Fuente:LAPOP2010",x = "Porcentaje", y = "Sastifaccionconlademocracia") +
+  geom_label(aes(label = porcentaje))
+```
+En el año 2008, el porcentaje de apoyo a la democracia que incluye desde los valores 5 a 7 se ubicó en 60,2%. Sin embargo, se encuentra un 36% de peruanos que no apoyó a la democracia como mejor forma de gobierno.
+
+```{r}
+Apoyo_democracia %>%
+  filter(year == "2008", !is.na(ing4)) %>%
+  select(year,ing4,porcentaje) %>%
+  ggplot(aes(porcentaje,ing4)) + 
+  geom_col(aes(fill = ing4)) +
+  labs(title = "Porcentaje de apoyo a la democracia 2008") +
+  labs(caption = "Fuente:LAPOP2008",x = "Porcentaje", y = "Apoyoalademocracia") +
+  geom_label(aes(label = porcentaje))
+```
+Con respecto a la sastifacción con la democracia para el año 2008, solo el 33,7% de los peruanos estaba satisfecho con la democracia, mientras que en las categorías insatisfecho y muy insatisfecho se encuentran valores de 55,1% y 7%, respectivamente.
+
+```{r}
+Satisfaccion_democracia %>%
+  filter(year == "2008",  !is.na(pn4)) %>%
+  select(pn4,porcentaje) %>%
+  mutate(porcentaje = round (porcentaje, 1)) %>%
+  ggplot(aes(pn4,porcentaje)) + 
+  geom_col(aes(fill = pn4 )) + 
+  labs(title = "Porcentaje de satisfacción con la democracia 2008") +
+  labs(caption = "Fuente:LAPOP2008",x = "Porcentaje", y = "Sastifaccionconlademocracia") +
+  geom_label(aes(label = porcentaje))
+```
+
+### Satisfacción con la democracia, Perú 2008 - 2019
+
+Luego del análisis por cada uno de los años de estudio según la variable seleccionada, se pretende realizar un análisis longitudinal a través de un gráfico según las dos variables. Para ello, en primer lugar se requiere recategorizar ambas.
+
+En el siguiente bloque de código, se recategoriza la variable satisfacción con la democracia (pn4) a través de la agrupación de las repuestas en dos categorías: Insatisfacción y Satisfacción. En los análisis que siguen, se agrupan los datos de tal forma que las respuestas de “muy insatisfecho” e “insatisfecho” se codifican conjuntamente como insatisfacción, y las respuestas “muy satisfecho” y “satisfecho” se codifican conjuntamente como satisfacción.
+
+```{r}
+Satisfaccion_democracia2<- Satisfaccion_democracia %>%
+mutate(categoria = case_when(
+        pn4 %in% c("Muy insatisfecho", "Insatisfecho", "Muy insatisfecho(a)",
+                   "Insatisfecho(a)", "Very Dissatisfied", "Dissatisfied") ~ "Insatisfaccion",
+        pn4 %in% c("Muy satisfecho", "Satisfecho","Muy satisfecho(a)",
+                   "Satisfecho(a)","Very Satisfied", "Satisfied") ~ "Satisfaccion",
+        TRUE ~ as.character(pn4)
+    )) 
+```
+
+```{r}
+Satisfaccion_democracia2
+```
+En este gráfico se muestra el porcentaje de peruanos satisfechos con la democracia a través del tiempo. Aquí se encuentra una tendencia interesante la cual muestra que mientras la insatisfacción ha ido creciendo y posicionándose cerca al 70% en las dos últimas mediciones, efectivamente la satisfacción ha descendido marcadamente llegando a ubicarse en 27,5%. Cabe destacar que apenas dos puntos porcentuales por encima de Panamá (26.1%), Perú tiene el segundo más bajo nivel de satisfacción promedio con el funcionamiento de la democracia en la región durante el año 2019:28%.
+
+```{r}
+Satisfaccion_democracia2 %>%
+  filter(categoria %in% c("Satisfaccion","Insatisfaccion")) %>% 
+  group_by(year,categoria)%>%
+  summarise(Satisfaccion_democracia = sum(porcentaje))%>%
+  ggplot(aes(year,Satisfaccion_democracia)) + 
+  geom_line(aes(color = categoria )) +
+  geom_label(aes(label = Satisfaccion_democracia))
+```
+
+### Apoyo a la democracia, Perú 2008 - 2019
+
+Se realiza el mismo procedimiento de recategorización para la variable apoyo a la democracia donde se consideran las respuestas en la porción de la escala que indica estar de acuerdo, esto es los valores de 5 a 7, para indicar el porcentaje de apoyo a la democracia.
+ 
+```{r}
+apoyo_democracia2<- Apoyo_democracia %>%
+mutate(categoria = case_when(
+        ing4 %in% c("5", "6", "Muy de acuerdo", "Strongly Agree","(5)", "(6)",
+                    "Muy de acuerdo (7)", "( 5 )", "( 6 )") ~ "Apoyo",
+        TRUE ~ as.character(ing4)
+  ))  
+```
+
+```{r}
+apoyo_democracia2
+```
+El nivel de apoyo a la democracia en Perú a través del tiempo se muestra en el siguiente gráfico. Si bien se han registrado variaciones desde los inicios de la medición, la tendencia reciente es claramente a la baja. Desde el 2012, el apoyo promedio a la democracia en Perú decrece en cada medición y ha caído  más de doce puntos desde el año 2008.En el año 2010, además, se da el registro histórico más bajo, con menos de la mitad de los consultados (49.7%) expresando apoyo a la democracia.De hecho, el apoyo a la democracia como sistema registrado por la encuesta 2019 es el más bajo desde que comenzaron las mediciones, solo el 48,4% consideran a la democracia como el régimen político preferible. También la satisfacción con el funcionamiento de la democracia registra sus menores niveles.
+
+En ese sentido, en el siguiente apartado se propone explorar con respecto a la relación entre ambas variables numéricas.
+
+```{r}
+apoyo_democracia2 %>%
+  filter(categoria == "Apoyo") %>% 
+  group_by(year,categoria)%>%
+  summarise(Apoyo_democracia = sum(porcentaje))%>%
+  ggplot(aes(year,Apoyo_democracia)) + 
+  geom_line(aes(color = categoria )) +
+  geom_label(aes(label = Apoyo_democracia))
+```
+
+### ¿Existe relación entre apoyo y la satifacción con la democracia en el Perú?
+
+Previo a explorar dicha relación, es importante filtrar en un data subset las únicas categorías con las cuales se va a analizar: satisfacción y apoyo. 
+
+```{r}
+Satisfaccion_democracia3 <-Satisfaccion_democracia2 %>%
+  filter(categoria %in% c("Satisfaccion")) %>% 
+  group_by(year,categoria)%>%
+  summarise(Satisfaccion_democracia = sum(porcentaje)) %>%
+  ungroup()
+```
+
+```{r}
+Apoyo_democracia3 <-apoyo_democracia2 %>%
+  filter(categoria == "Apoyo") %>% 
+  group_by(year,categoria)%>%
+  summarise(Apoyo_democracia = sum(porcentaje)) %>%
+  ungroup()
+```
+
+Para poder trabajar en un solo data frame se usa la función left join según la variable year para obtener los datos de apoyo y satisfacción con la democracia. Ahora con este objeto se puede elaborar el gráfico de dispersión. 
+
+```{r}
+apoyoysatisfaccion_democracia <-left_join(Apoyo_democracia3,Satisfaccion_democracia3, by = "year")
+```
+
+```{r}
+apoyoysatisfaccion_democracia
+```
+Hacemos el diagrama de dispersión para ver la posible relación entre ambas variables. Tal como se aprecia, según la ubicación de los puntos en el gráfico de dispersión no hay una relación clara entre el apoyo y la satisfacción con la democracia. En efecto, una limitación es la poca cantidad de datos observables en el gráfico que no muestra una tendencia definida en la relación de ambas variables. Si se analiza en función a los años se encuentra que la relación se vuelve más difusa para el año 2010 donde no se aproxima a la línea del gráfico de dispersión. En efecto, tal como se mencionó anteriormente, en el año 2010 se da el registro histórico más bajo con menos de la mitad de los consultados (49.7%) expresando apoyo a la democracia, este hecho podría contribuir a explicar su variabilidad.
+
+```{r}
+apoyoysatisfaccion_democracia %>%
+  ggplot(aes(Apoyo_democracia,Satisfaccion_democracia)) +
+  geom_point(color="red") +
+  geom_smooth(method="lm", se=TRUE)
+```
+
+## Conclusiones
+
+En conclusión, los problemas de la democracia y la falta de resultados en América Latina influyen en la opinión de los ciudadanos sobre su apoyo a este régimen político: la democracia. Los resultados del Latinobarómetro revelan el deterioro regular y ascendente de las democracias como fenómeno común y preocupante para América Latina, y el Perú no es la excepción. De acuerdo con los datos expuestos y el último Informe del Barómetro de las Américas 2018/19, del Proyecto de Opinión Pública de América Latina (LAPOP), el apoyo a la democracia – así como la satisfacción con el funcionamiento de la misma – ha ido variando sostenidamente durante últimos 10 años de evaluación con una tendencia hacia la disminución progresiva. 
+
+Con respecto al apoyo a la democracia en el Perú, se identifica un descenso sostenido desde el 2012 y para el 2019 se registró que menos del 50% de peruanos apoya la democracia como la mejor forma de gobierno en el país, uno de los niveles más bajos en la región – solo por encima de Bolivia, Guatemala y Honduras- y el menor valor desde el 2006 que se realizan estas mediciones en Perú, estando siempre por debajo del promedio regional. Asimismo, si nos referimos al nivel de satisfacción de los peruanos con la democracia los resultados tampoco son alentadores, en los últimos años la satisfacción con la democracia cayó a 28%.
+
+En efecto, tal como argumentan Levitsky & Ziblatt (2018), la forma en cómo mueren las democracias mayoritariamente se evidencia en el debilitamiento gradual y silencioso de éstas. Por ejemplo, el caso peruano es relevador para explorar mayores espacios de análisis con respecto al debilitamiento de la democracia evidenciada en la falta de apoyo y sastisfacción con esta forma de gobierno. De hecho, al revisar la relación entre apoyo y satisfacción con la democracia a través de un gráfico de dispersión se encuentra que no hay una relación clara entre ambas variables, pese a que ambas a través del tiempo han ido disminuyendo en su evaluación. 
+
+Finalmente, esta primera aproximación nos brinda un primer panorama con respecto al estado de la democracia en el Perú el cual debe ser analizado con mayor profundidad a través del uso de otras variables que permitan complementar un diagnóstico con el objetivo de mejorar la legitimidad y la representación política de la ciudadanía teniendo en cuenta que "la democracia electoral tiene mayor probabilidad de ser legitimada en la medida que haya un alto nivel de satisfacción con la democracia y que la ciudadanía perciba que el sistema es democrático" (Carrión et al 2020). En efecto, ambos elementos resultan ser componentes centrales para la gobernabilidad democrática del país.
+
+## Bibliografía
+
+Carrión, J. F., Zárate, P., & Zechmeister, E. J. (2020). Cultura política de la democracia en Perú y en las Américas, 2018/19: Tomándole el pulso a la democracia. Disponible en: https://iep.org.pe
+
+Levitsky, S., & Ziblatt, D. (2018). How democracies die. Broadway Books.
+
+Linde, Jonas y Joakim Ekman. 2003. “Satisfaction with Democracy; A Note on the Frequently Used Indicator in Comparative Politics.” European Journal of Political Research 42: 391-408.
+
+Linz, J.J. & Stepan, A. (1996). Problems of democratic consolidation. Southern Europe, South America, and Post-Comunist Europe. Baltimore: John Hopkins University Press.
+
+Mariani, R. (coord.). (2008). Democracia/Estado/Ciudadanía: hacia un Estado de y para la democracia en América Latina. Lima: Sede PNUD (Programa de las Naciones Unidas para el Desarrollo - PNUD).
+
+Mariani, R. (2008). Democracia, Estado y construcción del sujeto (ciudadanía). En Mariani, R. (coord.). Democracia/Estado/Ciudadanía: Hacia un Estado de y para la Democracia en América Latina. Lima: Sede PNUD (Programa de las Naciones Unidas para el Desarrollo - PNUD), pp. 79-98.
+
+O’Donnell, G. (2004). Notas sobre la democracia en América Latina. En La democracia en América Latina. Hacia una democracia de ciudadanas y ciudadanos. Anexo: El debate conceptual sobre la democracia (CD ROM). Buenos Aires: PNUD, Aguilar, Altea, Taurus, Alfaguara, pp. 11-82.
+
+O’Donnell, G. (2004). El desarrollo de la democracia en América Latina. En La democracia en América Latina. Hacia una democracia de ciudadanas y ciudadanos. Anexo: El debate conceptual sobre la democracia (CD ROM). Buenos Aires: PNUD, Aguilar, Altea, Taurus, Alfaguara, pp. 33-73.
+
+O’Donnell, G. (2004). Acerca del Estado en América Latina contemporánea: diez tesis para discusión. En La democracia en América Latina. Hacia una democracia de ciudadanas y ciudadanos. Anexo: El debate conceptual sobre la democracia (CD ROM). Buenos Aires: PNUD, Aguilar, Altea, Taurus, Alfaguara, pp. 149-192.

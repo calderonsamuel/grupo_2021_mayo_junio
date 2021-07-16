@@ -1,0 +1,218 @@
+
+# Algunos reportes respecto a las organizaciones juveniles a partir del Registro Nacional de Municipalidades - RENAMU 2020 y 2019 {#orgJuveniles}
+
+```{r setup-nelly, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE)
+
+source("R/global.R")
+```
+
+
+*Nelly Reyes*
+
+En este contexto de pandemia, y en tanta tensión política y social frente a la segunda vuelta de la elección presidencial 2021 y la demora en la proclamación de resultados, podemos también ver las diversas acciones pocas democráticas en señal abierta y en espacios públicos que nos invitan a tener una mirada reflexiva y crítica en evitar situaciones de dichas características.Por ello es importante no dejar de lado reflexionar como podemos seguir promoviendo el diálogo y la construcción de una comunidad/país que nos permita un reconocimiento mutuo como ciudadanos y ciudadanas, en un país más democrático, con igualdad de derechos y reconociendo el sin fin de nuestra diversidad entre nosotros y nosotras.
+
+Por ejemplo podemos mencionar que a nivel nacional existe una diversidad de organizaciones sociales sean territoriales, zonales, temáticas,etc. que son importante saber quienes son y que hacen, y como puede fortalecerse el ejercicio de sus derechos y la labor ciudadana que vienen realizando en su territorio. Las organizaciones juveniles, estarían consideras dentro de esta diversidad de organizaciones que es importante conocer y promover junto a ellos y ellas el ejercicio de sus derechos ciudadanos. Revisaré datas públicas que me permitan responder desde las municipalidades distritales y provinciales cuántas informan, cuántas organizaciones juveniles hay, y cuántos beneficiarios y beneficiarias se encuentran dentro de las mismas. Además de revisar data desde la SENAJU - Secretaría Nacional de la Juventud, que nos permita conocer cuántas organizaciones juveniles vienen mapeando o registrando, y por último de la Red Metropolitana para organizaciones juveniles
+
+## Paquetes usados
+
+Para realizar los análisis de la base de datos cargaremos 03 paquetes, el paquete tidyverse que nos permite hacer una limpieza de datos, usar el data frames y realizar gráficos con ggplot2; el paquete Haven que nos permite leer archivos en SPSS y STATA y el paquete de excel que lee archivos de tipo excel.
+
+```{r}
+library(tidyverse)
+library(haven)
+library(readxl)
+```
+
+
+## Conjuntos de datos usados
+
+Usaré 04 base de datos para responder las preguntas planteadas al inicio. Esta data son de acceso libre y puedes encontrarla en los siguientes links.
+
+- RENAMU 2020 - Registro Nacional de Municipalidades 2020 [http://iinei.inei.gob.pe/microdatos/RENAMU2020]
+- RENAMU 2019 - Registro Nacional de Municipalidades 2019 [http://iinei.inei.gob.pe/microdatos/RENAMU2019]
+- DATOS ABIERTOS DE LA RED METROPOLITANA PARA ORGANIZACIONES JUVENILES [http://redmetro.gpvlima.com/public/publicaciones]
+- DATA DE ORGANIZACIONES JUVENILES EN EL PERÚ - SENAJU [https://juventud.gob.pe/organizaciones-juveniles/]
+
+En el caso del RENAMU - Registro Nacional de Municipalidades 2020, esta encuesta nos permite conocer a nivel nacional la información de las 196 municipalidades provinciales y 1 mil 676 municipalidades distritales del
+país registradas en el RENAMU 2020. A traves de algunas preguntas que registran en su ficha de recojo de información, tomaré para este análisis  las siguientes: cuántas municipalidades informaron si tienen o no organizaciones juveniles, cuántas organizaciones juveniles hay, y cuántos son los/las beneficiados/as por ellos; la información que se recoje es del año anterior al registro. En este caso el RENAMU 2020 toma información hasta el 31 de diciembre del 2019, y el RENAMU 2019 recoje información hasta el 31 de diciembre del 2018.Finalmente es importante señalar, que esta data aporta en generar indicadores municipales que sirvan de apoyo a la gestión estatal a nivel regional, provincial y local para una adecuada toma de desiciones y planificación.
+
+Respecto a la data de la Red Metropolitana para organizaciones juveniles esta contiene 18 variables sobre los datos de las organizaciones a nivel de Lima Metropolitana como: nombre de la organización, acrónimo de organización, tipo de organización, descripción organización, líneas temáticas, nivel de incidencia, etc. Y la data de organizaciones juveniles del Perú de SENAJU contempla nombre de la organización juvenil, región, provincia, representante de la organización Juvenil y temáticas que trabaja las organizaciones
+
+Renombraré arbitrariamente las 04 base de datos usando códigos en R que me permita leer de manera adecuada la data. 
+
+
+```{r}
+RENAMU_2020 <- read_sav("data/Revision de OJ reportadas.C12.sav") %>% 
+  as_factor()
+
+RENAMU_2019 <- read_sav("data/RENAMU_2019_OJ.sav") %>% 
+  as_factor()
+
+Data_Metropolitana <- read_excel("data/Data_publica_RMOJ.xlsx",
+             sheet = 2,
+             skip = 3)
+
+Data_SENAJU <- read_excel("data/Data_publica_SENAJU.xlsx")
+```
+
+Luego voy a proceder a seleccionar 08 variables de la base de datos RENAMU 2020 y nombrarlas como varibles_select, estas variables están referidas a la información de departamento, provincia, distrito, tipo de municipalidad, si informó o no la municipalidad, si informó o no la municipalidad que tiene organizaciones juveniles, número de organizaciones juveniles, total de beneficiarios de organizaciones juveniles afiliados al 31 de diciembre del 2019 
+
+```{r}
+variables_select <-
+  select(
+    RENAMU_2020,
+    Departamento,
+    Provincia,
+    Distrito,
+    Tipomuni,
+    VFI_P60A,
+    P60A_4,
+    P60A_4_1,
+    P60A_4_2
+  )
+```
+
+Realizaré la misma selección de variables del RENAMU 2020 para el caso de la base de datos RENAMU 2019. De las 101 variables de la base de datos nos enfocaremos en 08 variables que son: departamento, provincia, distrito, tipo de municipalidad, si informó o no la municipalidad, si informó o no la municipalidad que tiene organizaciones juveniles, número de organizaciones juveniles, total de beneficiarios de organizaciones juveniles afiliados al 31 de diciembre del 2018. A esta nueva base de datos lo llamaremos variables_select_2019
+
+```{r}
+variables_select_2019 <-
+  select(
+    RENAMU_2019,
+    Departamento,
+    Provincia,
+    Distrito,
+    Tipomuni,
+    VFI_P60A,
+    P60A_4,
+    P60A_4_1,
+    P60A_4_2
+  )
+```
+
+## Resultados
+
+1- Tomaré la base denominada variables_select que son variables seleccionadas de la base de datos RENAMU 2020, luego agruparé la variable que muestra que municipalidades(provinciales y distritales)respondieron que si tienen organizaciones juveniles y cuales no. Después aplicaré summarise para pedirle un recuento de cantidad de municipalidades que dijeron que sí y cuántas que no, y por último realizaré mutate para generar un variable de porcentaje para conocer, que porcentaje representa los que dijeron que sí y las que respondieron que no.
+
+```{r}
+variables_select %>%
+  group_by(P60A_4) %>%
+  summarise(recuento = n()) %>%
+  mutate(porcentaje = recuento / sum(recuento) * 100,
+         porcentaje = round(porcentaje, 1))
+```
+
+Como observamos en la tabla en el RENAMU 2020, fueron el 9.9% de municipalidades que reportaron que si tienen organizaciones juveniles, mientras que el 90% reportaron que no tienen, y son 0.1% las que no registraron ninguna información. 
+
+2- Ahora con la base variable_select_2019 que toma 08 variables del RENAMU 2019 , veré cuántas municipalidades informaron sobre sus organizaciones juveniles, las agrupare por las respuestas que se dieron, luego pediré una recuento de cuantas municipalidades con un summarise y recuento n, y finalmente aplicaré un mutate para conocer el porcentaje que conrresponde a la cantidad de respuestas.
+
+```{r}
+variables_select_2019 %>%
+  group_by(P60A_4) %>%
+  summarise(recuento = n()) %>%
+  mutate(porcentaje = recuento / sum(recuento) * 100,
+         porcentaje = round(porcentaje, 1))
+```
+
+Como observamos en el cuadro es son 10.1% las municipalidades que reportaron que si tienen organizaciones juveniles, mientras el 89.9% de municipalidades respondieron que no tienen organizaciones juveniles.  
+
+3- Ahora revisemos que ocurre con las organizaciones reportadas a nivel Lima Metropolitana desde la data del RENAMU 2019, pero tomaremos la data con las variables seleccionadas como lo mencionamos lineas arriba, con las 08 variables que nos interesan por ahora. 
+
+Vamos a filtrar variables_select_2019 pidiendo los resultados de la provincia Lima, luego agruparemos por la variable de quienes respondieron que si tenían una organización juvenil, le pediremos un recuento con sumarise, aplicaremos mutate para crear la variable del porcentaje que corresponde dicha cantidad. 
+
+```{r}
+variables_select_2019 %>%
+  filter(Provincia == "LIMA") %>%
+  group_by(P60A_4) %>%
+  summarise(recuento = n()) %>%
+  mutate(porcentaje = recuento / sum(recuento) * 100,
+         porcentaje = round(porcentaje, 1))
+```
+
+Como observamos a nivel de la región de Lima y provincia Lima que contempla a los 42 distritos de Lima y a Lima Metropolitana. El RENAMU 2019 nos muestra que solo 1 municipalidad que representa al 2.3% del total que reportó que tenía organizaciones juveniles, mientras los 42 restantes reportaron que no son el 97.7%.
+
+Para saber que municipalidad reportó, podemos volver a hacer la operación de filtrar y nos muestra el caso especifico. 
+
+```{r}
+variables_select_2019 %>%
+  filter(Provincia=="LIMA")
+```
+
+Como observamos en el cuadro en Lima metropolitana no informó que tenían organizaciones juveniles, y la única municipalidad que informó fue Punta Hermosa, donde registra 01 organización juvenil con 28 miembros.
+
+4- Ahora realizaremos la misma operación anterior pero con el RENAMU 2020 y las variables seleccionadas que las renombré como variables_select voy filtrar pidiendo conocer las de provincia Lima, luego las agrupare por la variable que respondieron quienes si y no tienen organizaciones juveniles, realizare un recuento con summarise, y por último aplicare mutate y pediré el porcentaje al cual corresponde el recuento realizado.
+
+```{r}
+variables_select %>%
+  filter(Provincia == "LIMA") %>%
+  group_by(P60A_4) %>%
+  summarise(recuento = n()) %>%
+  mutate(porcentaje = recuento / sum(recuento) * 100,
+         porcentaje = round(porcentaje, 1))
+```
+
+Como observamos en la tabla son 09 municipalidades que son el 20.9% a nivel de Lima Metropolitana las que reportaron que si tienen organizaciones juveniles, mientras que 34 municipalidades que son el 79.1% reportaron que no tienen organizaciones juveniles. 
+
+Realizaremos una filtrado sencillo de la base de datos variables_select para mostrar quienes son estas 09 municipalidades a nivel de Lima Metropolitana.
+
+```{r}
+variables_select %>%
+  filter(Provincia == "LIMA") %>%
+  filter(P60A_4 == "Sí")
+```
+
+Como podemos observar que fueron las municipalidades de La Molina, Lince, Miraflores, Pucusana, Punta Hermosa, Punta Negra, San Juan de Miraflores, San Luis y Villa El Salvador las que informaron que si tienen organizaciones juveniles. Los demás municipalidades no informaron que tenían organizaciones juveniles, y ello incluye también a Lima Metropolitana
+
+5- Ahora miraremos cuantas organizaciones juveniles están reportadas en la RENAMU del 2019 y 2020 a nivel de Lima Metropolitana, y cuantas tenemos en la base de datos abiertos que tiene la SENAJU y la Municipalidad de Lima Metropolitana a través. Cabe precisar que esta base de datos la tomamos como reportes públicos que no implica necesariamente una acreditación de reconocimiento de la organización juvenil corroborado en algún registro municipal u otro. 
+
+Tomaremos la base variables_select que es del RENAMU 2020, luego filtraremos las de provincia Lima, seguido de otra filtrado con la variable de las municipalidades que respondieron que Sí tienen alguna organización juvenil,y por último pediremos un summarise del numero de organizaciones reportadas, esto quiere decir la suma de organizaciones reportadas.
+
+```{r}
+variables_select %>%
+  filter(Provincia == "LIMA") %>%
+  filter(P60A_4 == "Sí") %>%
+  summarise(numero_de_organizaciones = sum(P60A_4_1))
+```
+
+Como observamos en el cuadro son 93 organizaciones juveniles reportadas el RENAMU 2020,y como vimos líneas arriba en el RENAMU 2019 fue 01 organización reportada.Esto quiere decir que estos dos últimos reportes del RENANU dieron un total de 94 organizaciones juveniles
+
+Ahora revisando la data la SENAJU, vamos a conocer cuantas organizaciones tienen mapeadas o reportadas a nivel nacional y a nivel Lima Metropolitana. Como se muestra en la data son 596 organizaciones juveniles reportadas a nivel naciona. Para conocer cuantas hay en Lima Metropolitana, hacemos un filtrado de la data, luego le pedimos la variable provincia Lima, y seguido de un summarise un recuento de la cantidad de organizaciones juveniles.
+
+```{r}
+Data_SENAJU %>%
+  filter(Provincia == "LIMA") %>%
+  summarise(recuento = n())
+```
+
+Como observamos en el cuadro son 246 organizaciones juveniles reportadas a nivel de Lima Metropolitana en la base de la SENAJU. Una diferencia importante respecto al RENAMU 2020 y 2019 que registra también información nacional que hacen un total de 94 organizaciones juveniles en total.
+
+6.Ahora revisaremos la data pública que tiene la Red Metropolitana para las organizaciones juveniles que tiene la Municipalidad de Lima Metropolitana. Para ello colocaremos el nombre de la data y luego le pediremos summarise para conocer el recuento
+
+```{r}
+Data_Metropolitana %>% 
+ summarise(recuento=n()) 
+```
+
+Esta tabla nos muestra que hay un total de 147 organizaciones juveniles reportadas en el Red Metropolitana para organizaciones juveniles, también nos muestra un información mayor a lo reportado al RENAMU 2019 y 2020
+
+## Algunas conclusiones
+
+Como observamos en los resultados en la RENAMU 2019 fueron 10.1% las municipalidades que reportaron que tenía organizaciones juveniles, mientras en el RENAMU 2020 observamos que el 9.9% respondieron que tienen organizaciones juveniles. Vemos una pequeña disminución en el porcentaje de municipalidades en reportar sobre las organizaciones juveniles, sin embargo es preocupante que más del 89% de municipalidades del país responden que no tienen organizaciones juveniles. Quizá cabe preguntarnos ¿No hay organizaciones juveniles en su territorio? ¿No se registra? ¿No se registra en el RENAMU? ¿No se conoce sobre ellas y ellos? ¿Por qué ocurre ello?
+
+
+En el caso de Lima Metropolitana observamos en los resultados que en el RENAMU 2019 solo reportó la municipalidad distrital de Punta Hermosa que sí tenía organizaciones juveniles y en el RENAMU 2020 fueron 09 municipalidades distritales como: La Molina, Lince, Miraflores, Pucusana, Punta Hermosa, Punta Negra, San Juan de Miraflores, San Luis y Villa El Salvador. En ambosreportes del RENAMU vemos que Lima Metropolitana reportó que no tenía organizaciones juveniles; y cabe precisar que ambas datas corresponden al corte de información de diciembre 2018 del RENAMU 2019 y diciembre 2019 al RENAMU 2020. Sin embargo es muy poco el porcentaje reportado a nivel distrital, y que esperemos pueda mejorar el mapeo y registro de las municipalidades distritales a nivel Lima Metropolitana en el próximo RENAMU
+
+Respecto a la cantidad de organizaciones juveniles reportadas observamos que la SENAJU reporta 246 organizaciones juveniles a nivel de Lima Metropolitana, la Red Metropolitana para organizaciones juveniles 147, y el RENAMU 2020 reporta 93 organizaciones juveniles a nivel de Lima Metropolitana, y el RENAMU 2019 reportó 01 organización a nivel de Lima Metropolitana. Este constraste de cantidades nos muestra, considero la necesidad de articulación de sinergias de los gobiernos locales, provinciales, regionales y nacional para fortalecer el mapeo, el registro y el reconocimiento de las organizaciones juveniles. El ejercicio de nuestros derechos como ciudadanas y ciudadanos, parte de una dialogo respetuoso basado en el reconocimiento mutuo sea como ciudadanos/as desde nuestras individualidades/diversidades o como colectivos/colectivas organizadas.
+
+Por último es importante señalar que existe un registro nacional de organizaciones juveniles acreditadas desde la SENAJU y puedes encontrar en su página los requisitos para inscribirte, en este link [https://juventud.gob.pe/registro-nacional-de-organizaciones-juveniles-2021/] Además de ello existe a nivel metropolitano la Red Metropolitana para organizaciones juveniles que puedes encontrar los requisitos en este link[http://redmetro.gpvlima.com/public/formulario]
+
+También precisar que existió la ordenanza 556 del año 2003 que permitió crear un registro unico de organizaciones juveniles y que luego fue derogada en el año 2013 y se aprobó la ordenanza 1762, donde se incluye a las organizaciones juveniles, y que establece procedimientos para el reconocimiento y registro de las organizaciones sociales para la participación vecinal en Lima Metropolitana. Puedes encontrar esta información en el SPIJ - Sistema Peruano de Información Jurídica [http://spijlibre.minjus.gob.pe/normativa_libre/main.asp]
+
+## Referencias
+
+- Registro Nacional de Municipalidades [http://iinei.inei.gob.pe/microdatos/]
+- RED METROPOLITANA PARA ORGANIZACIONES JUVENILES [http://redmetro.gpvlima.com/public/publicaciones]
+- SENAJU [https://juventud.gob.pe/organizaciones-juveniles/]
+- SPIJ - Sistema Peruano de Información Jurídica [http://spijlibre.minjus.gob.pe/normativa_libre/main.asp]
+

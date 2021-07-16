@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 3 Trabajo de Jennifer | Elaboración de productos de datos: Reportes con R Markdown</title>
+  <meta name="description" content="Este libro es una compilación de reportes individuales trabajados durante mayo y junio del 2021 en el Taller de Elaboración de productos de datos dictado por Samuel Calderon." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 3 Trabajo de Jennifer | Elaboración de productos de datos: Reportes con R Markdown" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Este libro es una compilación de reportes individuales trabajados durante mayo y junio del 2021 en el Taller de Elaboración de productos de datos dictado por Samuel Calderon." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 3 Trabajo de Jennifer | Elaboración de productos de datos: Reportes con R Markdown" />
+  
+  <meta name="twitter:description" content="Este libro es una compilación de reportes individuales trabajados durante mayo y junio del 2021 en el Taller de Elaboración de productos de datos dictado por Samuel Calderon." />
+  
+
+<meta name="author" content="Samuel Calderon, Felipe Bedoya, Maira Chamota, Jennifer Ponce, Nelly Reyes, Almendra Rodriguez" />
+
+
+<meta name="date" content="2021-07-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="trabajo-de-maira.html"/>
+<link rel="next" href="trabajo-de-almendra.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Elaboración de productos de datos: Reportes con R Markdown</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html"><i class="fa fa-check"></i>Sobre los autores</a>
+<ul>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#felipe-bedoya"><i class="fa fa-check"></i>Felipe Bedoya</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#maira-chamota"><i class="fa fa-check"></i>Maira Chamota</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#jennifer-ponce"><i class="fa fa-check"></i>Jennifer Ponce</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#nelly-reyes"><i class="fa fa-check"></i>Nelly Reyes</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#almendra-rodriguez"><i class="fa fa-check"></i>Almendra Rodriguez</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#samuel-calderon"><i class="fa fa-check"></i>Samuel Calderon</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html"><i class="fa fa-check"></i><b>1</b> Trabajo de Felipe</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#introducción"><i class="fa fa-check"></i><b>1.1</b> Introducción</a></li>
+<li class="chapter" data-level="1.2" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#paquetes-usados"><i class="fa fa-check"></i><b>1.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="1.3" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#conjuntos-de-datos-usados"><i class="fa fa-check"></i><b>1.3</b> Conjuntos de datos usados</a></li>
+<li class="chapter" data-level="1.4" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#resultados"><i class="fa fa-check"></i><b>1.4</b> Resultados</a></li>
+<li class="chapter" data-level="1.5" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#conclusiones"><i class="fa fa-check"></i><b>1.5</b> Conclusiones</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html"><i class="fa fa-check"></i><b>2</b> Trabajo de Maira</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#introducción-1"><i class="fa fa-check"></i><b>2.1</b> Introducción</a></li>
+<li class="chapter" data-level="2.2" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#paquetes-usados-1"><i class="fa fa-check"></i><b>2.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="2.3" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#conjuntos-de-datos-usados-1"><i class="fa fa-check"></i><b>2.3</b> Conjuntos de datos usados</a></li>
+<li class="chapter" data-level="2.4" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#resultados-1"><i class="fa fa-check"></i><b>2.4</b> Resultados</a></li>
+<li class="chapter" data-level="2.5" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#conclusiones-1"><i class="fa fa-check"></i><b>2.5</b> Conclusiones</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="trabajo-de-jennifer.html"><a href="trabajo-de-jennifer.html"><i class="fa fa-check"></i><b>3</b> Trabajo de Jennifer</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="trabajo-de-jennifer.html"><a href="trabajo-de-jennifer.html#introducción-2"><i class="fa fa-check"></i><b>3.1</b> Introducción</a></li>
+<li class="chapter" data-level="3.2" data-path="trabajo-de-jennifer.html"><a href="trabajo-de-jennifer.html#paquetes-usados-2"><i class="fa fa-check"></i><b>3.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="3.3" data-path="trabajo-de-jennifer.html"><a href="trabajo-de-jennifer.html#conjuntos-de-datos-usados-2"><i class="fa fa-check"></i><b>3.3</b> Conjuntos de datos usados</a></li>
+<li class="chapter" data-level="3.4" data-path="trabajo-de-jennifer.html"><a href="trabajo-de-jennifer.html#resultados-2"><i class="fa fa-check"></i><b>3.4</b> Resultados</a></li>
+<li class="chapter" data-level="3.5" data-path="trabajo-de-jennifer.html"><a href="trabajo-de-jennifer.html#conclusiones-2"><i class="fa fa-check"></i><b>3.5</b> Conclusiones</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="trabajo-de-almendra.html"><a href="trabajo-de-almendra.html"><i class="fa fa-check"></i><b>4</b> Trabajo de Almendra</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="trabajo-de-almendra.html"><a href="trabajo-de-almendra.html#introducción-3"><i class="fa fa-check"></i><b>4.1</b> Introducción</a></li>
+<li class="chapter" data-level="4.2" data-path="trabajo-de-almendra.html"><a href="trabajo-de-almendra.html#paquetes-usados-3"><i class="fa fa-check"></i><b>4.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="4.3" data-path="trabajo-de-almendra.html"><a href="trabajo-de-almendra.html#conjuntos-de-datos-usados-3"><i class="fa fa-check"></i><b>4.3</b> Conjuntos de datos usados</a></li>
+<li class="chapter" data-level="4.4" data-path="trabajo-de-almendra.html"><a href="trabajo-de-almendra.html#resultados-3"><i class="fa fa-check"></i><b>4.4</b> Resultados</a></li>
+<li class="chapter" data-level="4.5" data-path="trabajo-de-almendra.html"><a href="trabajo-de-almendra.html#conclusiones-3"><i class="fa fa-check"></i><b>4.5</b> Conclusiones</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="trabajo-de-nelly.html"><a href="trabajo-de-nelly.html"><i class="fa fa-check"></i><b>5</b> Trabajo de Nelly</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="trabajo-de-nelly.html"><a href="trabajo-de-nelly.html#introducción-4"><i class="fa fa-check"></i><b>5.1</b> Introducción</a></li>
+<li class="chapter" data-level="5.2" data-path="trabajo-de-nelly.html"><a href="trabajo-de-nelly.html#paquetes-usados-4"><i class="fa fa-check"></i><b>5.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="5.3" data-path="trabajo-de-nelly.html"><a href="trabajo-de-nelly.html#conjuntos-de-datos-usados-4"><i class="fa fa-check"></i><b>5.3</b> Conjuntos de datos usados</a></li>
+<li class="chapter" data-level="5.4" data-path="trabajo-de-nelly.html"><a href="trabajo-de-nelly.html#resultados-4"><i class="fa fa-check"></i><b>5.4</b> Resultados</a></li>
+<li class="chapter" data-level="5.5" data-path="trabajo-de-nelly.html"><a href="trabajo-de-nelly.html#conclusiones-4"><i class="fa fa-check"></i><b>5.5</b> Conclusiones</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elaboración de productos de datos: Reportes con R Markdown</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="trabajo-de-jennifer" class="section level1" number="3">
+<h1><span class="header-section-number">Capítulo 3</span> Trabajo de Jennifer</h1>
+<div id="introducción-2" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Introducción</h2>
+<p>Descripción del tema central del trabajo (¿qué pregunta quiero responder?¿qué preguntas necesito responder previamente?)</p>
+</div>
+<div id="paquetes-usados-2" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Paquetes usados</h2>
+<p>Descripción del aporte de cada paquete usado (¿qué funciones/operaciones me permite realizar?)</p>
+</div>
+<div id="conjuntos-de-datos-usados-2" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Conjuntos de datos usados</h2>
+<p>Descripción de cada conjunto de datos (¿qué variables contiene?¿quién recoge la información contenida allí?) y su aporte al trabajo (¿qué pregunta me permite responder?).</p>
+<p>En caso se haya hecho una limpieza u ordenamiento de los datos, explicar el código utilizado.</p>
+</div>
+<div id="resultados-2" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Resultados</h2>
+<p>Usar bloques de código para obtener respuestas a mis preguntas</p>
+<p>Antes de cada bloque explicar en lenguaje no técnico qué hace el bloque de código (¿qué operación estoy realizando?¿para qué quiero obtener esto?)</p>
+<p>Si mi bloque tiene como resultado una tabla o gráfico debo explicar brevemente el resultado. Si mi bloque tiene como resultado la creación de un objeto en el environment, no es necesario explicar el resultado.</p>
+</div>
+<div id="conclusiones-2" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Conclusiones</h2>
+<p>Las respuestas obtenidas de las preguntas planteadas en la introducción.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="trabajo-de-maira.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="trabajo-de-almendra.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["grupo_2021_mayo_junio.pdf", "grupo_2021_mayo_junio.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,3520 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 4 Midiendo el pulso de la democracia en el Perú, 2008 - 2019 | Elaboración de productos de datos: Reportes con R Markdown</title>
+  <meta name="description" content="Este libro es una compilación de reportes individuales trabajados durante mayo y junio del 2021 en el Taller de Elaboración de productos de datos dictado por Samuel Calderon." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 4 Midiendo el pulso de la democracia en el Perú, 2008 - 2019 | Elaboración de productos de datos: Reportes con R Markdown" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Este libro es una compilación de reportes individuales trabajados durante mayo y junio del 2021 en el Taller de Elaboración de productos de datos dictado por Samuel Calderon." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 4 Midiendo el pulso de la democracia en el Perú, 2008 - 2019 | Elaboración de productos de datos: Reportes con R Markdown" />
+  
+  <meta name="twitter:description" content="Este libro es una compilación de reportes individuales trabajados durante mayo y junio del 2021 en el Taller de Elaboración de productos de datos dictado por Samuel Calderon." />
+  
+
+<meta name="author" content="Samuel Calderon, Felipe Bedoya, Maira Chamota, Jennifer Ponce, Nelly Reyes, Almendra Rodriguez" />
+
+
+<meta name="date" content="2021-07-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="eleccionesSJL.html"/>
+<link rel="next" href="orgJuveniles.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Elaboración de productos de datos: Reportes con R Markdown</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html"><i class="fa fa-check"></i>Sobre los autores</a>
+<ul>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#felipe-bedoya"><i class="fa fa-check"></i>Felipe Bedoya</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#maira-chamota"><i class="fa fa-check"></i>Maira Chamota</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#jennifer-ponce"><i class="fa fa-check"></i>Jennifer Ponce</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#nelly-reyes"><i class="fa fa-check"></i>Nelly Reyes</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#almendra-rodriguez"><i class="fa fa-check"></i>Almendra Rodriguez</a></li>
+<li class="chapter" data-level="" data-path="sobre-los-autores.html"><a href="sobre-los-autores.html#samuel-calderon"><i class="fa fa-check"></i>Samuel Calderon</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html"><i class="fa fa-check"></i><b>1</b> Trabajo de Felipe</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#introducción"><i class="fa fa-check"></i><b>1.1</b> Introducción</a></li>
+<li class="chapter" data-level="1.2" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#paquetes-usados"><i class="fa fa-check"></i><b>1.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="1.3" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#conjuntos-de-datos-usados"><i class="fa fa-check"></i><b>1.3</b> Conjuntos de datos usados</a></li>
+<li class="chapter" data-level="1.4" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#resultados"><i class="fa fa-check"></i><b>1.4</b> Resultados</a></li>
+<li class="chapter" data-level="1.5" data-path="trabajo-de-felipe.html"><a href="trabajo-de-felipe.html#conclusiones"><i class="fa fa-check"></i><b>1.5</b> Conclusiones</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html"><i class="fa fa-check"></i><b>2</b> Trabajo de Maira</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#introducción-1"><i class="fa fa-check"></i><b>2.1</b> Introducción</a></li>
+<li class="chapter" data-level="2.2" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#paquetes-usados-1"><i class="fa fa-check"></i><b>2.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="2.3" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#conjuntos-de-datos-usados-1"><i class="fa fa-check"></i><b>2.3</b> Conjuntos de datos usados</a></li>
+<li class="chapter" data-level="2.4" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#resultados-1"><i class="fa fa-check"></i><b>2.4</b> Resultados</a></li>
+<li class="chapter" data-level="2.5" data-path="trabajo-de-maira.html"><a href="trabajo-de-maira.html#conclusiones-1"><i class="fa fa-check"></i><b>2.5</b> Conclusiones</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html"><i class="fa fa-check"></i><b>3</b> Una primera mirada a últimas cinco elecciones municipales de San Juan de Lurigancho desde el 2002 hasta el 2018</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#introducción-2"><i class="fa fa-check"></i><b>3.1</b> Introducción</a></li>
+<li class="chapter" data-level="3.2" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#paquetes-usados-2"><i class="fa fa-check"></i><b>3.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="3.3" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#conjuntos-de-datos-usados-2"><i class="fa fa-check"></i><b>3.3</b> Conjuntos de datos usados</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#autoridades-distritales-cinco-elecciones-municipales-2002-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.1</b> Autoridades Distritales: Cinco Elecciones Municipales 2002, 2006, 2010, 2014, 2018</a></li>
+<li class="chapter" data-level="3.3.2" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#candidatos-distritales-cinco-elecciones-municipales-2002-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.2</b> Candidatos Distritales: Cinco Elecciones Municipales 2002, 2006, 2010, 2014, 2018</a></li>
+<li class="chapter" data-level="3.3.3" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#extranyendo-la-información-sobre-san-juan-de-lurigancho-autoridades-municipales-2002-2006-2010-2014-y-2018"><i class="fa fa-check"></i><b>3.3.3</b> Extranyendo la información sobre San Juan de Lurigancho: Autoridades municipales 2002, 2006, 2010, 2014 y 2018</a></li>
+<li class="chapter" data-level="3.3.4" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#sobre-la-base-2018"><i class="fa fa-check"></i><b>3.3.4</b> Sobre la base 2018</a></li>
+<li class="chapter" data-level="3.3.5" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#una-sola-base-autoridades-municipales-sjl-2002-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.5</b> Una sola base: Autoridades Municipales SJL 2002, 2006, 2010, 2014, 2018</a></li>
+<li class="chapter" data-level="3.3.6" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#extrayendo-la-información-disponible-sobre-la-base-de-candidatos-distritales-elecciones-2002-2004-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.6</b> Extrayendo la información disponible sobre la Base de Candidatos Distritales: elecciones 2002, 2004, 2006, 2010, 2014, 2018</a></li>
+<li class="chapter" data-level="3.3.7" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#una-sola-base-candidatos-distritales-sjl-2002-2006-2010-2014-2018"><i class="fa fa-check"></i><b>3.3.7</b> Una sola base: Candidatos Distritales SJL 2002, 2006, 2010, 2014, 2018</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#resultados-1-1"><i class="fa fa-check"></i><b>3.4</b> RESULTADOS 1 :</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#el-número-de-votos-y-porcentaje-de-votación-de-los-alcaldes-ganadores-por-año-electoral"><i class="fa fa-check"></i><b>3.4.1</b> El número de votos y porcentaje de votación de los alcaldes ganadores por año electoral</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#resultados-2"><i class="fa fa-check"></i><b>3.5</b> RESULTADOS 2:</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#evolución-del-número-y-tipo-de-organización-política-por-año-electoral"><i class="fa fa-check"></i><b>3.5.1</b> Evolución del número y tipo de organización política por año electoral</a></li>
+<li class="chapter" data-level="3.5.2" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#la-evolución-del-número-de-organizaciones-políticas-por-año-electoral"><i class="fa fa-check"></i><b>3.5.2</b> La evolución del número de organizaciones políticas por año electoral</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#conclusiones-2"><i class="fa fa-check"></i><b>3.6</b> Conclusiones</a></li>
+<li class="chapter" data-level="3.7" data-path="eleccionesSJL.html"><a href="eleccionesSJL.html#referencias"><i class="fa fa-check"></i><b>3.7</b> Referencias</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html"><i class="fa fa-check"></i><b>4</b> Midiendo el pulso de la democracia en el Perú, 2008 - 2019</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#introducción-3"><i class="fa fa-check"></i><b>4.1</b> Introducción</a></li>
+<li class="chapter" data-level="4.2" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#paquetes-usados-3"><i class="fa fa-check"></i><b>4.2</b> Paquetes usados</a></li>
+<li class="chapter" data-level="4.3" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#conjunto-de-datos"><i class="fa fa-check"></i><b>4.3</b> Conjunto de datos</a></li>
+<li class="chapter" data-level="4.4" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#resultados-3"><i class="fa fa-check"></i><b>4.4</b> Resultados</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#desapego-democrático-el-apoyo-y-la-satisfacción-con-la-democracia-en-franco-descenso"><i class="fa fa-check"></i><b>4.4.1</b> Desapego democrático: El apoyo y la satisfacción con la democracia en franco descenso</a></li>
+<li class="chapter" data-level="4.4.2" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#satisfacción-con-la-democracia-perú-2008---2019"><i class="fa fa-check"></i><b>4.4.2</b> Satisfacción con la democracia, Perú 2008 - 2019</a></li>
+<li class="chapter" data-level="4.4.3" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#apoyo-a-la-democracia-perú-2008---2019"><i class="fa fa-check"></i><b>4.4.3</b> Apoyo a la democracia, Perú 2008 - 2019</a></li>
+<li class="chapter" data-level="4.4.4" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#existe-relación-entre-el-apoyo-y-la-satifacción-con-la-democracia-en-el-perú"><i class="fa fa-check"></i><b>4.4.4</b> ¿Existe relación entre el apoyo y la satifacción con la democracia en el Perú?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#conclusiones-3"><i class="fa fa-check"></i><b>4.5</b> Conclusiones</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#la-democracia-en-el-perú-pierde-seguidores"><i class="fa fa-check"></i><b>4.5.1</b> La democracia en el Perú pierde seguidores</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="pulsoDemocracia.html"><a href="pulsoDemocracia.html#referencias-1"><i class="fa fa-check"></i><b>4.6</b> Referencias</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="orgJuveniles.html"><a href="orgJuveniles.html"><i class="fa fa-check"></i><b>5</b> Algunos reportes respecto a las organizaciones juveniles a partir del Registro Nacional de Municipalidades - RENAMU 2020 y 2019</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="orgJuveniles.html"><a href="orgJuveniles.html#paquetes-usados-4"><i class="fa fa-check"></i><b>5.1</b> Paquetes usados</a></li>
+<li class="chapter" data-level="5.2" data-path="orgJuveniles.html"><a href="orgJuveniles.html#conjuntos-de-datos-usados-3"><i class="fa fa-check"></i><b>5.2</b> Conjuntos de datos usados</a></li>
+<li class="chapter" data-level="5.3" data-path="orgJuveniles.html"><a href="orgJuveniles.html#resultados-4"><i class="fa fa-check"></i><b>5.3</b> Resultados</a></li>
+<li class="chapter" data-level="5.4" data-path="orgJuveniles.html"><a href="orgJuveniles.html#algunas-conclusiones"><i class="fa fa-check"></i><b>5.4</b> Algunas conclusiones</a></li>
+<li class="chapter" data-level="5.5" data-path="orgJuveniles.html"><a href="orgJuveniles.html#referencias-2"><i class="fa fa-check"></i><b>5.5</b> Referencias</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elaboración de productos de datos: Reportes con R Markdown</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pulsoDemocracia" class="section level1" number="4">
+<h1><span class="header-section-number">Capítulo 4</span> Midiendo el pulso de la democracia en el Perú, 2008 - 2019</h1>
+<p><em>Almendra Rodriguez Rivera</em></p>
+<div id="introducción-3" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Introducción</h2>
+<!-- Descripción del tema central del trabajo (¿qué pregunta quiero responder?¿qué preguntas necesito responder previamente?) -->
+<p>La democracia constituye uno de los principios de organización sobre los cuales actúa el Estado (Mariani, 2008). En el presente trabajo se entiende a la democracia como “una forma de organización del poder en la sociedad con el objetivo de ampliar la ciudadanía, evitar o limitar la dominación de individuos o grupos que impidan este objetivo y lograr la perdurabilidad de la organización democrática” (O’Donnell, 2004, p. 22). Para ello, la democracia necesita de un Estado que la establezca como una forma de ciudadanía universal (Mariani, 2008), sin embargo, en América Latina este requisito constituye uno de los déficits democráticos.</p>
+<p>En efecto, de acuerdo con estudios nacionales e internacionales, la democracia en América Latina afronta diversos problemas que amenazan la calidad del funcionamiento o, incluso, la propia supervivencia del régimen democrático. Según Carrión et al (2020), en el Perú, <strong>dos de cada tres consultados (66,3%) cree que su país es una democracia</strong> y constituye el segundo valor más alto tras Paraguay (67,3%). Asimismo, dada la conexión entre el estado de la opinión pública y la estabilidad democrática, el estancamiento del apoyo a la democracia en la región en general, y en Perú en particular, es preocupante (Carrión et al 2020). Cabe destacar que esto es preocupante porque la conjunción de dos aspectos como la satisfacción y el apoyo a la democracia se podrían traducir en el apoyo a autoritarismos y la búsqueda de vías no democráticas para alcanzar el poder político.</p>
+<p>Por tal razón, a través del uso de encuestas de cultura política se pretende aproximar a un diágnostico del estado de la democracia en el Perú en torno a su satisfacción y apoyo. Así, la pregunta de investigación que orienta este proyecto es la siguiente: <em>¿Cómo ha ido variando la satisfacción y el apoyo hacia la democracia durante el periodo 2008 - 2019?</em></p>
+<p>En función a ello, primero se exploran cada uno de los resultados bianuales desde el año 2008 hasta el 2019 y se complementa a través de un análisis longitudinal para cada una de las dos variables de estudio. Posteriormente, se presenta un gráfico de dispersión para observar la relación entre ambas variables: la satisfacción con la democracia y el apoyo a la democracia.</p>
+</div>
+<div id="paquetes-usados-3" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Paquetes usados</h2>
+<!-- Descripción del aporte de cada paquete usado (¿qué funciones/operaciones me permite realizar?) -->
+<p>Con la finalidad de trabajar con las bases de datos, en primer lugar se cargan tres paquetes: tidyverse, haven y ggthemes. Si bien haven permite leer base de datos .sav y .dta que es el tipo de archivo en el cual se encuentran las bases de datos de LAPOP, en el caso de tidyverse se usa para la limpieza de datos con dplyr de modo que sea más útil para el análisis y la manipulación de data frames, así como para la exploración descriptiva de gráficos a través de ggplot2. Adicionalmente, se usa ggthemes para incluir temas a los gráficos de modo que mejore la visualización de datos en el análisis.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="pulsoDemocracia.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb45-2"><a href="pulsoDemocracia.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb45-3"><a href="pulsoDemocracia.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span></code></pre></div>
+</div>
+<div id="conjunto-de-datos" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Conjunto de datos</h2>
+<!-- Descripción de cada conjunto de datos (¿qué variables contiene?¿quién recoge la información contenida allí?) y su aporte al trabajo (¿qué pregunta me permite responder?). En caso se haya hecho una limpieza u ordenamiento de los datos, explicar el código utilizado. -->
+<p>Las base de datos con respecto a la cultura política que permite medir diversas variables relacionadas a la democracia se encuentran disponibles - para su descarga gratuita - como parte del Proyecto de Opinión Pública de América Latina (LAPOP) en el siguiente link: <a href="http://datasets.americasbarometer.org/database/index.php#" class="uri">http://datasets.americasbarometer.org/database/index.php#</a></p>
+<p>Este proyecto consiste en un estudio bianual que analiza desde distintas perspectivas la cultura política y la democrática de los países del continente. Así, la base de datos del Barómetro de las Américas contribuye en las discusiones y debates con respecto a la calidad y la fortaleza de la democracia en la región, y en específico, en el Perú desde el año de su medición: 2006. Como “barómetro,” el proyecto ofrece insumos importantes sobre las tendencias a largo plazo que permiten identificar retrocesos democráticos y resaltar las mejoras en las normas y actitudes de la ciudadanía. En efecto, el Barómetro de las Américas de LAPOP es una herramienta única para evaluar las experiencias del público con la gobernabilidad democrática (Zechmeister &amp; Lupu, 2019).</p>
+<p>En el siguiente bloque de código, se leen las seis bases de datos .sav y .dta y se usa as_factor() con el fin de obtener las etiquetas de datos codificadas en el formato original, SPSS o STATA, respectivamente.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="pulsoDemocracia.html#cb46-1" aria-hidden="true" tabindex="-1"></a>LAPOP_2008 <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">&quot;data/PERU_LAPOP_2008 final data.sav&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>()</span>
+<span id="cb46-2"><a href="pulsoDemocracia.html#cb46-2" aria-hidden="true" tabindex="-1"></a>LAPOP_2010 <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">&quot;data/PERU_LAPOP_2010 final data.sav&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>()</span>
+<span id="cb46-3"><a href="pulsoDemocracia.html#cb46-3" aria-hidden="true" tabindex="-1"></a>LAPOP_2012 <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">&quot;data/PERU_LAPOP_2012 final data.sav&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>()</span>
+<span id="cb46-4"><a href="pulsoDemocracia.html#cb46-4" aria-hidden="true" tabindex="-1"></a>LAPOP_2014 <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">&quot;data/PERU_LAPOP_2014 final data.sav&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>()</span>
+<span id="cb46-5"><a href="pulsoDemocracia.html#cb46-5" aria-hidden="true" tabindex="-1"></a>LAPOP_2017 <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">&quot;data/PERU_LAPOP_2017 final data.dta&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>()</span>
+<span id="cb46-6"><a href="pulsoDemocracia.html#cb46-6" aria-hidden="true" tabindex="-1"></a>LAPOP_2019 <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">&quot;data/PERU_LAPOP_2019 final data.dta&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>()</span></code></pre></div>
+<p>Posterior a la exploración de las bases de datos, con la finalidad de brindar un adecuado análisis exploratorio resulta fundamental iniciar con la limpieza de datos seleccionando las variables elegidas: year (año en el cual se realizó la encuesta), ing4 (apoyo a la democracia), pn4 (satisfacción con la democracia), wt (factor de expansión).</p>
+<p>Para ello, se estandarizó la variable wt como numérica con el objetivo de lograr trabajar con las bases en conjunto. Cabe destacar que para las bases de datos del 2008 y 2010 se está considerado el valor 1 como wt, debido a que esta variable no se encontró previamente en la data.</p>
+<p>Luego de crear con la función mutate el wt y la variable year, se seleccionan las variables elegidas para cada una de las bases de datos y posteriormente se crea la base de datos Democracia_subset que contiene las cuatro variables seleccionadas para el análisis: year, ing4,pn4,wt.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="pulsoDemocracia.html#cb47-1" aria-hidden="true" tabindex="-1"></a>DemocraciaPeru_2008 <span class="ot">&lt;-</span> LAPOP_2008 <span class="sc">%&gt;%</span></span>
+<span id="cb47-2"><a href="pulsoDemocracia.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wt=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb47-3"><a href="pulsoDemocracia.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="dv">2008</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb47-4"><a href="pulsoDemocracia.html#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,ing4,pn4,wt)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="pulsoDemocracia.html#cb48-1" aria-hidden="true" tabindex="-1"></a>DemocraciaPeru_2010 <span class="ot">&lt;-</span> LAPOP_2010 <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="pulsoDemocracia.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wt=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="pulsoDemocracia.html#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="dv">2010</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="pulsoDemocracia.html#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,ing4,pn4,wt)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="pulsoDemocracia.html#cb49-1" aria-hidden="true" tabindex="-1"></a>DemocraciaPeru_2012 <span class="ot">&lt;-</span>LAPOP_2012 <span class="sc">%&gt;%</span></span>
+<span id="cb49-2"><a href="pulsoDemocracia.html#cb49-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">year =</span> <span class="dv">2012</span>, <span class="at">wt =</span> <span class="fu">as.double</span>(wt))<span class="sc">%&gt;%</span></span>
+<span id="cb49-3"><a href="pulsoDemocracia.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,ing4,pn4,wt)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="pulsoDemocracia.html#cb50-1" aria-hidden="true" tabindex="-1"></a>DemocraciaPeru_2014 <span class="ot">&lt;-</span>LAPOP_2014 <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="pulsoDemocracia.html#cb50-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">year =</span> <span class="dv">2014</span>, <span class="at">wt =</span> <span class="fu">as.double</span>(wt))<span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="pulsoDemocracia.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,ing4,pn4,wt)</span></code></pre></div>
+<p>En la base de datos del año 2017 hay una muestra original LAPOP (1530 entrevistas efectivas) y una sobremuestra (1.117 entrevistas: 705 rurales y 412 urbanas) que se realizaron en lugares (municipios) no incluidos en la muestra nacional de LAPOP. Cabe señalar que, los resultados presentados se basan en el análisis de la muestra ponderada de Perú, de esta manera se refleja la distribución real de la población urbana y rural en las distintas localidades del país y es comparable con las muestras de los años anteriores. En otras palabras, solo se filtra la muestra original LAPOP que contiene 1530 observaciones de las 4 variables seleccionadas.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="pulsoDemocracia.html#cb51-1" aria-hidden="true" tabindex="-1"></a>DemocraciaPeru_2017 <span class="ot">&lt;-</span>LAPOP_2017 <span class="sc">%&gt;%</span></span>
+<span id="cb51-2"><a href="pulsoDemocracia.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sobremuestra <span class="sc">==</span> <span class="dv">0</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="pulsoDemocracia.html#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="dv">2017</span>, <span class="at">wt =</span> <span class="fu">as.double</span>(wt))<span class="sc">%&gt;%</span></span>
+<span id="cb51-4"><a href="pulsoDemocracia.html#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,ing4,pn4,wt)</span></code></pre></div>
+<p>A diferencia del año 2017, en la ronda de 2019 no se hizo sobremuestra.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="pulsoDemocracia.html#cb52-1" aria-hidden="true" tabindex="-1"></a>DemocraciaPeru_2019 <span class="ot">&lt;-</span>LAPOP_2019 <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="pulsoDemocracia.html#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="dv">2019</span>, <span class="at">wt =</span> <span class="fu">as.double</span>(wt))<span class="sc">%&gt;%</span></span>
+<span id="cb52-3"><a href="pulsoDemocracia.html#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,ing4,pn4,wt)</span></code></pre></div>
+<p>A continuación,luego de limpiar y crear como objeto las bases de datos por año en el environment, se procede a juntar las filas seleccionadas de todas las bases de datos desde el año 2008 hasta el 2019 en una sola: Democracia_subset. Para ello, se utiliza la función bind_rows.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="pulsoDemocracia.html#cb53-1" aria-hidden="true" tabindex="-1"></a>Democracia_subset<span class="ot">&lt;-</span><span class="fu">bind_rows</span>(DemocraciaPeru_2008,DemocraciaPeru_2010,</span>
+<span id="cb53-2"><a href="pulsoDemocracia.html#cb53-2" aria-hidden="true" tabindex="-1"></a>                             DemocraciaPeru_2012,DemocraciaPeru_2014,DemocraciaPeru_2017,</span>
+<span id="cb53-3"><a href="pulsoDemocracia.html#cb53-3" aria-hidden="true" tabindex="-1"></a>                             DemocraciaPeru_2019)</span></code></pre></div>
+<p>Previo al análisis de los resultados, resulta necesario explorar una muestra de 100 observaciones del conjunto de datos a usar para el análisis.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="pulsoDemocracia.html#cb54-1" aria-hidden="true" tabindex="-1"></a>Democracia_subset <span class="sc">%&gt;%</span> </span>
+<span id="cb54-2"><a href="pulsoDemocracia.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">100</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-54">Tabla 4.1: </span>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+year
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+ing4
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+pn4
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+wt
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="5" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Dissatisfied
+</td>
+<td style="text-align:right;">
+1.7077419
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+Strongly Agree
+</td>
+<td style="text-align:left;">
+Dissatisfied
+</td>
+<td style="text-align:right;">
+0.9441529
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Dissatisfied
+</td>
+<td style="text-align:right;">
+0.9441529
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+Muy de acuerdo
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="5" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+Muy de acuerdo
+</td>
+<td style="text-align:left;">
+Satisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="5" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="4" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="6" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 5 )
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+Muy de acuerdo
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="6" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Satisfied
+</td>
+<td style="text-align:right;">
+1.7077419
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+Strongly Disagree
+</td>
+<td style="text-align:left;">
+Very Dissatisfied
+</td>
+<td style="text-align:right;">
+1.7169729
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 6 )
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="3" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Dissatisfied
+</td>
+<td style="text-align:right;">
+0.7473882
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="5" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 3 )
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Dissatisfied
+</td>
+<td style="text-align:right;">
+1.7077419
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 2 )
+</td>
+<td style="text-align:left;">
+Satisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="2" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="5" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Dissatisfied
+</td>
+<td style="text-align:right;">
+1.7169729
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 6 )
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Satisfied
+</td>
+<td style="text-align:right;">
+1.7169729
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Satisfied
+</td>
+<td style="text-align:right;">
+1.0414426
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Satisfied
+</td>
+<td style="text-align:right;">
+0.5414318
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Satisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Satisfied
+</td>
+<td style="text-align:right;">
+1.7077419
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Muy insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Muy insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+Muy de acuerdo
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Very Dissatisfied
+</td>
+<td style="text-align:right;">
+1.7169729
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+Muy de acuerdo
+</td>
+<td style="text-align:left;">
+Satisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 4 )
+</td>
+<td style="text-align:left;">
+Muy insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+Strongly Agree
+</td>
+<td style="text-align:left;">
+Satisfied
+</td>
+<td style="text-align:right;">
+1.7169729
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+Muy de acuerdo
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Satisfied
+</td>
+<td style="text-align:right;">
+1.7169729
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Muy insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+Muy de acuerdo
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+Muy de acuerdo
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 4 )
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Dissatisfied
+</td>
+<td style="text-align:right;">
+1.7169729
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 5 )
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Muy insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="6" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Dissatisfied
+</td>
+<td style="text-align:right;">
+1.7169729
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 5 )
+</td>
+<td style="text-align:left;">
+Satisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+Muy de acuerdo (7)
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 6 )
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="3" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="3" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Muy insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Muy insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+Muy de acuerdo
+</td>
+<td style="text-align:left;">
+Satisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 6 )
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Muy satisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Satisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="4" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Satisfied
+</td>
+<td style="text-align:right;">
+1.7077419
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Muy satisfecho(a)
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Satisfecho
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="5" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+</tbody>
+</table>
+</div></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol>
+<p>A continuación, se observa la frecuencia de la primera variable seleccionada: el apoyo a la democracia (ing4). Asimismo, se presenta el porcentaje de apoyo a la democracia del total de encuestados teniendo en consideración el factor de expansión y excluyendo los valores perdidos (na.rm).</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="pulsoDemocracia.html#cb55-1" aria-hidden="true" tabindex="-1"></a>Apoyo_democracia <span class="ot">&lt;-</span>Democracia_subset <span class="sc">%&gt;%</span></span>
+<span id="cb55-2"><a href="pulsoDemocracia.html#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(ing4)) <span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="pulsoDemocracia.html#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year,ing4)<span class="sc">%&gt;%</span></span>
+<span id="cb55-4"><a href="pulsoDemocracia.html#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">apoyo_democracia =</span> <span class="fu">sum</span>(wt,<span class="at">na.rm =</span> <span class="cn">TRUE</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb55-5"><a href="pulsoDemocracia.html#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">porcentaje =</span> apoyo_democracia<span class="sc">/</span><span class="fu">sum</span>(apoyo_democracia)<span class="sc">*</span><span class="dv">100</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb55-6"><a href="pulsoDemocracia.html#cb55-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">porcentaje =</span> <span class="fu">round</span> (porcentaje, <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb55-7"><a href="pulsoDemocracia.html#cb55-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<p>Del mismo modo, se realiza dicho procedimiento para la otra variable seleccionada: satisfacción con la democracia (pn4).</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="pulsoDemocracia.html#cb56-1" aria-hidden="true" tabindex="-1"></a>Satisfaccion_democracia <span class="ot">&lt;-</span> Democracia_subset <span class="sc">%&gt;%</span></span>
+<span id="cb56-2"><a href="pulsoDemocracia.html#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pn4)) <span class="sc">%&gt;%</span></span>
+<span id="cb56-3"><a href="pulsoDemocracia.html#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year,pn4)<span class="sc">%&gt;%</span></span>
+<span id="cb56-4"><a href="pulsoDemocracia.html#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">satisfaccion_democracia =</span> <span class="fu">sum</span>(wt,<span class="at">na.rm =</span> <span class="cn">TRUE</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb56-5"><a href="pulsoDemocracia.html#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">porcentaje =</span> satisfaccion_democracia<span class="sc">/</span><span class="fu">sum</span>(satisfaccion_democracia)<span class="sc">*</span><span class="dv">100</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb56-6"><a href="pulsoDemocracia.html#cb56-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">porcentaje =</span> <span class="fu">round</span> (porcentaje, <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb56-7"><a href="pulsoDemocracia.html#cb56-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<p>Asimismo, otro paso previo a la exploración de datos consiste en la recategorización de cada una de las variables. Primero, en el siguiente bloque de código, se recategoriza la variable satisfacción con la democracia (pn4) a través de la agrupación de las respuestas en dos categorías: Insatisfacción y Satisfacción. En los análisis que siguen, se agrupan los datos de tal forma que las respuestas de “muy insatisfecho” e “insatisfecho” se codifican conjuntamente como insatisfacción, y las respuestas “muy satisfecho” y “satisfecho” se codifican conjuntamente como satisfacción.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="pulsoDemocracia.html#cb57-1" aria-hidden="true" tabindex="-1"></a>Satisfaccion_democracia2<span class="ot">&lt;-</span> Satisfaccion_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a href="pulsoDemocracia.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">categoria =</span> <span class="fu">case_when</span>(</span>
+<span id="cb57-3"><a href="pulsoDemocracia.html#cb57-3" aria-hidden="true" tabindex="-1"></a>        pn4 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Muy insatisfecho&quot;</span>, <span class="st">&quot;Insatisfecho&quot;</span>, <span class="st">&quot;Muy insatisfecho(a)&quot;</span>,</span>
+<span id="cb57-4"><a href="pulsoDemocracia.html#cb57-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;Insatisfecho(a)&quot;</span>, <span class="st">&quot;Very Dissatisfied&quot;</span>, <span class="st">&quot;Dissatisfied&quot;</span>) <span class="sc">~</span> <span class="st">&quot;Insatisfaccion&quot;</span>,</span>
+<span id="cb57-5"><a href="pulsoDemocracia.html#cb57-5" aria-hidden="true" tabindex="-1"></a>        pn4 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Muy satisfecho&quot;</span>, <span class="st">&quot;Satisfecho&quot;</span>,<span class="st">&quot;Muy satisfecho(a)&quot;</span>,</span>
+<span id="cb57-6"><a href="pulsoDemocracia.html#cb57-6" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;Satisfecho(a)&quot;</span>,<span class="st">&quot;Very Satisfied&quot;</span>, <span class="st">&quot;Satisfied&quot;</span>) <span class="sc">~</span> <span class="st">&quot;Satisfaccion&quot;</span>,</span>
+<span id="cb57-7"><a href="pulsoDemocracia.html#cb57-7" aria-hidden="true" tabindex="-1"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(pn4)</span>
+<span id="cb57-8"><a href="pulsoDemocracia.html#cb57-8" aria-hidden="true" tabindex="-1"></a>    )) </span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="pulsoDemocracia.html#cb58-1" aria-hidden="true" tabindex="-1"></a>Satisfaccion_democracia2</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-58">Tabla 4.2: </span>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+year
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+pn4
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+satisfaccion_democracia
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+porcentaje
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+categoria
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+Muy satisfecho
+</td>
+<td style="text-align:right;">
+20.00000
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+Satisfecho
+</td>
+<td style="text-align:right;">
+486.00000
+</td>
+<td style="text-align:right;">
+33.8
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+826.00000
+</td>
+<td style="text-align:right;">
+57.5
+</td>
+<td style="text-align:left;">
+Insatisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+Muy insatisfecho
+</td>
+<td style="text-align:right;">
+105.00000
+</td>
+<td style="text-align:right;">
+7.3
+</td>
+<td style="text-align:left;">
+Insatisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+Muy satisfecho
+</td>
+<td style="text-align:right;">
+35.00000
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+Satisfecho
+</td>
+<td style="text-align:right;">
+528.00000
+</td>
+<td style="text-align:right;">
+36.6
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+Insatisfecho
+</td>
+<td style="text-align:right;">
+789.00000
+</td>
+<td style="text-align:right;">
+54.8
+</td>
+<td style="text-align:left;">
+Insatisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+Muy insatisfecho
+</td>
+<td style="text-align:right;">
+89.00000
+</td>
+<td style="text-align:right;">
+6.2
+</td>
+<td style="text-align:left;">
+Insatisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+Muy satisfecho(a)
+</td>
+<td style="text-align:right;">
+21.00000
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+344.00000
+</td>
+<td style="text-align:right;">
+48.8
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+318.00000
+</td>
+<td style="text-align:right;">
+45.1
+</td>
+<td style="text-align:left;">
+Insatisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+Muy insatisfecho(a)
+</td>
+<td style="text-align:right;">
+22.00000
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:left;">
+Insatisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+Muy satisfecho(a)
+</td>
+<td style="text-align:right;">
+21.00000
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+521.00000
+</td>
+<td style="text-align:right;">
+36.4
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+797.00000
+</td>
+<td style="text-align:right;">
+55.7
+</td>
+<td style="text-align:left;">
+Insatisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+Muy insatisfecho(a)
+</td>
+<td style="text-align:right;">
+93.00000
+</td>
+<td style="text-align:right;">
+6.5
+</td>
+<td style="text-align:left;">
+Insatisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+Very Satisfied
+</td>
+<td style="text-align:right;">
+81.84035
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+Satisfied
+</td>
+<td style="text-align:right;">
+504.93559
+</td>
+<td style="text-align:right;">
+24.0
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+Dissatisfied
+</td>
+<td style="text-align:right;">
+1163.29129
+</td>
+<td style="text-align:right;">
+55.3
+</td>
+<td style="text-align:left;">
+Insatisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+Very Dissatisfied
+</td>
+<td style="text-align:right;">
+305.55985
+</td>
+<td style="text-align:right;">
+14.5
+</td>
+<td style="text-align:left;">
+Insatisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+Don’t Know
+</td>
+<td style="text-align:right;">
+35.01354
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:left;">
+Don’t Know
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+No Response
+</td>
+<td style="text-align:right;">
+11.67508
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:left;">
+No Response
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+Muy satisfecho(a)
+</td>
+<td style="text-align:right;">
+54.00000
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+Satisfecho(a)
+</td>
+<td style="text-align:right;">
+363.00000
+</td>
+<td style="text-align:right;">
+23.9
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+Insatisfecho(a)
+</td>
+<td style="text-align:right;">
+854.00000
+</td>
+<td style="text-align:right;">
+56.1
+</td>
+<td style="text-align:left;">
+Insatisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+Muy insatisfecho(a)
+</td>
+<td style="text-align:right;">
+220.00000
+</td>
+<td style="text-align:right;">
+14.5
+</td>
+<td style="text-align:left;">
+Insatisfaccion
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+No responde
+</td>
+<td style="text-align:right;">
+7.00000
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:left;">
+No responde
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+No sabe
+</td>
+<td style="text-align:right;">
+23.00000
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:left;">
+No sabe
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Segundo, a continuación se realiza el mismo procedimiento de recategorización para la variable apoyo a la democracia (ing4) donde se consideran las respuestas en la porción de la escala que indica estar de acuerdo, esto es los valores de 5 a 7, para indicar el porcentaje de apoyo a la democracia.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="pulsoDemocracia.html#cb59-1" aria-hidden="true" tabindex="-1"></a>apoyo_democracia2<span class="ot">&lt;-</span> Apoyo_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb59-2"><a href="pulsoDemocracia.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">categoria =</span> <span class="fu">case_when</span>(</span>
+<span id="cb59-3"><a href="pulsoDemocracia.html#cb59-3" aria-hidden="true" tabindex="-1"></a>        ing4 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;5&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;Muy de acuerdo&quot;</span>, <span class="st">&quot;Strongly Agree&quot;</span>,<span class="st">&quot;(5)&quot;</span>, <span class="st">&quot;(6)&quot;</span>,</span>
+<span id="cb59-4"><a href="pulsoDemocracia.html#cb59-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Muy de acuerdo (7)&quot;</span>, <span class="st">&quot;( 5 )&quot;</span>, <span class="st">&quot;( 6 )&quot;</span>) <span class="sc">~</span> <span class="st">&quot;Apoyo&quot;</span>,</span>
+<span id="cb59-5"><a href="pulsoDemocracia.html#cb59-5" aria-hidden="true" tabindex="-1"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(ing4)</span>
+<span id="cb59-6"><a href="pulsoDemocracia.html#cb59-6" aria-hidden="true" tabindex="-1"></a>  ))  </span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="pulsoDemocracia.html#cb60-1" aria-hidden="true" tabindex="-1"></a>apoyo_democracia2</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-60">Tabla 4.3: </span>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+year
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+ing4
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+apoyo_democracia
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+porcentaje
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+categoria
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+Muy en desacuerdo
+</td>
+<td style="text-align:right;">
+41.00000
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:left;">
+Muy en desacuerdo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 2 )
+</td>
+<td style="text-align:right;">
+64.00000
+</td>
+<td style="text-align:right;">
+4.4
+</td>
+<td style="text-align:left;">
+( 2 )
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 3 )
+</td>
+<td style="text-align:right;">
+140.00000
+</td>
+<td style="text-align:right;">
+9.7
+</td>
+<td style="text-align:left;">
+( 3 )
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 4 )
+</td>
+<td style="text-align:right;">
+296.00000
+</td>
+<td style="text-align:right;">
+20.5
+</td>
+<td style="text-align:left;">
+( 4 )
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 5 )
+</td>
+<td style="text-align:right;">
+322.00000
+</td>
+<td style="text-align:right;">
+22.3
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+( 6 )
+</td>
+<td style="text-align:right;">
+327.00000
+</td>
+<td style="text-align:right;">
+22.7
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+Muy de acuerdo
+</td>
+<td style="text-align:right;">
+253.00000
+</td>
+<td style="text-align:right;">
+17.5
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+Muy en desacuerdo
+</td>
+<td style="text-align:right;">
+70.00000
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:left;">
+Muy en desacuerdo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+Muy de acuerdo
+</td>
+<td style="text-align:right;">
+230.00000
+</td>
+<td style="text-align:right;">
+16.0
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+94.00000
+</td>
+<td style="text-align:right;">
+6.5
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+188.00000
+</td>
+<td style="text-align:right;">
+13.1
+</td>
+<td style="text-align:left;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+341.00000
+</td>
+<td style="text-align:right;">
+23.7
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:right;">
+266.00000
+</td>
+<td style="text-align:right;">
+18.5
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:right;">
+250.00000
+</td>
+<td style="text-align:right;">
+17.4
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+Muy en desacuerdo (1)
+</td>
+<td style="text-align:right;">
+31.00000
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:left;">
+Muy en desacuerdo (1)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="2" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:right;">
+70.00000
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:left;">
+<ol start="2" style="list-style-type: decimal">
+<li></td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="3" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:right;">
+183.00000
+</td>
+<td style="text-align:right;">
+12.5
+</td>
+<td style="text-align:left;">
+<ol start="3" style="list-style-type: decimal">
+<li></td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="4" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:right;">
+305.00000
+</td>
+<td style="text-align:right;">
+20.9
+</td>
+<td style="text-align:left;">
+<ol start="4" style="list-style-type: decimal">
+<li></td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="5" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:right;">
+363.00000
+</td>
+<td style="text-align:right;">
+24.8
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+<ol start="6" style="list-style-type: decimal">
+<li></td>
+<td style="text-align:right;">
+284.00000
+</td>
+<td style="text-align:right;">
+19.4
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+Muy de acuerdo (7)
+</td>
+<td style="text-align:right;">
+225.00000
+</td>
+<td style="text-align:right;">
+15.4
+</td>
+<td style="text-align:left;">
+Muy de acuerdo (7)
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+Muy en desacuerdo
+</td>
+<td style="text-align:right;">
+55.00000
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:left;">
+Muy en desacuerdo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+Muy de acuerdo
+</td>
+<td style="text-align:right;">
+241.00000
+</td>
+<td style="text-align:right;">
+16.8
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+85.00000
+</td>
+<td style="text-align:right;">
+5.9
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+174.00000
+</td>
+<td style="text-align:right;">
+12.1
+</td>
+<td style="text-align:left;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+279.00000
+</td>
+<td style="text-align:right;">
+19.5
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:right;">
+339.00000
+</td>
+<td style="text-align:right;">
+23.6
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:right;">
+261.00000
+</td>
+<td style="text-align:right;">
+18.2
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+102.87376
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+248.53232
+</td>
+<td style="text-align:right;">
+11.8
+</td>
+<td style="text-align:left;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+512.82385
+</td>
+<td style="text-align:right;">
+24.4
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:right;">
+525.80941
+</td>
+<td style="text-align:right;">
+25.0
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:right;">
+308.55496
+</td>
+<td style="text-align:right;">
+14.7
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+Strongly Disagree
+</td>
+<td style="text-align:right;">
+95.42827
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+<td style="text-align:left;">
+Strongly Disagree
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+Strongly Agree
+</td>
+<td style="text-align:right;">
+280.00671
+</td>
+<td style="text-align:right;">
+13.3
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+No Response
+</td>
+<td style="text-align:right;">
+7.13661
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:left;">
+No Response
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+Don’t Know
+</td>
+<td style="text-align:right;">
+21.14981
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Don’t Know
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+Muy en desacuerdo
+</td>
+<td style="text-align:right;">
+60.00000
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:left;">
+Muy en desacuerdo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+Muy de acuerdo
+</td>
+<td style="text-align:right;">
+152.00000
+</td>
+<td style="text-align:right;">
+10.0
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+87.00000
+</td>
+<td style="text-align:right;">
+5.7
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+208.00000
+</td>
+<td style="text-align:right;">
+13.7
+</td>
+<td style="text-align:left;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+404.00000
+</td>
+<td style="text-align:right;">
+26.6
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:right;">
+399.00000
+</td>
+<td style="text-align:right;">
+26.2
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:right;">
+186.00000
+</td>
+<td style="text-align:right;">
+12.2
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+No sabe
+</td>
+<td style="text-align:right;">
+18.00000
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:left;">
+No sabe
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+No responde
+</td>
+<td style="text-align:right;">
+7.00000
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:left;">
+No responde
+</td>
+</tr>
+</tbody>
+</table>
+</div></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol>
+<p>En el último apartado se propone explorar con respecto a la relación entre la satisfacción y el apoyo a la democracia, y para ello es importante filtrar en un data subset las únicas categorías con las cuales se va a analizar: satisfacción y apoyo.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="pulsoDemocracia.html#cb61-1" aria-hidden="true" tabindex="-1"></a>Satisfaccion_democracia3 <span class="ot">&lt;-</span>Satisfaccion_democracia2 <span class="sc">%&gt;%</span></span>
+<span id="cb61-2"><a href="pulsoDemocracia.html#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(categoria <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Satisfaccion&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb61-3"><a href="pulsoDemocracia.html#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year,categoria)<span class="sc">%&gt;%</span></span>
+<span id="cb61-4"><a href="pulsoDemocracia.html#cb61-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Satisfaccion_democracia =</span> <span class="fu">sum</span>(porcentaje)) <span class="sc">%&gt;%</span></span>
+<span id="cb61-5"><a href="pulsoDemocracia.html#cb61-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="pulsoDemocracia.html#cb62-1" aria-hidden="true" tabindex="-1"></a>Apoyo_democracia3 <span class="ot">&lt;-</span>apoyo_democracia2 <span class="sc">%&gt;%</span></span>
+<span id="cb62-2"><a href="pulsoDemocracia.html#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(categoria <span class="sc">==</span> <span class="st">&quot;Apoyo&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-3"><a href="pulsoDemocracia.html#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year,categoria)<span class="sc">%&gt;%</span></span>
+<span id="cb62-4"><a href="pulsoDemocracia.html#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Apoyo_democracia =</span> <span class="fu">sum</span>(porcentaje)) <span class="sc">%&gt;%</span></span>
+<span id="cb62-5"><a href="pulsoDemocracia.html#cb62-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<p>En esa misma línea, para poder trabajar en un solo data frame se usa la función left join según la variable year para obtener los datos de apoyo y satisfacción con la democracia. Ahora con este objeto se puede elaborar posteriormente el gráfico de dispersión.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="pulsoDemocracia.html#cb63-1" aria-hidden="true" tabindex="-1"></a>apoyoysatisfaccion_democracia <span class="ot">&lt;-</span><span class="fu">left_join</span>(Apoyo_democracia3,Satisfaccion_democracia3, <span class="at">by =</span> <span class="st">&quot;year&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="pulsoDemocracia.html#cb64-1" aria-hidden="true" tabindex="-1"></a>apoyoysatisfaccion_democracia</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-64">Tabla 4.4: </span>
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+year
+</th>
+<th style="text-align:left;">
+categoria.x
+</th>
+<th style="text-align:right;">
+Apoyo_democracia
+</th>
+<th style="text-align:left;">
+categoria.y
+</th>
+<th style="text-align:right;">
+Satisfaccion_democracia
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+<td style="text-align:right;">
+62.5
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+<td style="text-align:right;">
+35.2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+<td style="text-align:right;">
+51.9
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+<td style="text-align:right;">
+39.0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+<td style="text-align:right;">
+44.2
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+<td style="text-align:right;">
+51.8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+<td style="text-align:right;">
+58.6
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+<td style="text-align:right;">
+37.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+<td style="text-align:right;">
+53.0
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+<td style="text-align:right;">
+27.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+Apoyo
+</td>
+<td style="text-align:right;">
+48.4
+</td>
+<td style="text-align:left;">
+Satisfaccion
+</td>
+<td style="text-align:right;">
+27.5
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="resultados-3" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Resultados</h2>
+<!-- Usar bloques de código para obtener respuestas a mis preguntas. Antes de cada bloque explicar en lenguaje no técnico qué hace el bloque de código (¿qué operación estoy realizando?¿para qué quiero obtener esto?). Si mi bloque tiene como resultado una tabla o gráfico debo explicar brevemente el resultado. Si mi bloque tiene como resultado la creación de un objeto en el environment, no es necesario explicar el resultado. -->
+<p>Posterior a la limpieza de datos, a continuación se inicia con el análisis exploratorio de resultados tanto para la satisfacción, apoyo a la democracia, así como su correlación a través de un gráfico de dispersión.</p>
+<div id="desapego-democrático-el-apoyo-y-la-satisfacción-con-la-democracia-en-franco-descenso" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Desapego democrático: El apoyo y la satisfacción con la democracia en franco descenso</h3>
+<p>El apoyo de los ciudadanos a la democracia es fundamental para el mantenimiento de sistemas libres y justos, así como también para reforzar el trabajo en contra del retroceso democrático (Zechmeister &amp; Lupu, 2019).En esa misma línea, considerando que el apoyo mayoritario de la ciudadanía hacia el gobierno democrático es una pieza fundamental para el mantenimiento del mismo (Linz y Stepan, 1996), desde su creación, el proyecto del Barómetro de las Américas ha realizado la siguiente pregunta con el fin de medir el apoyo a la democracia:</p>
+<ul>
+<li><strong>ING4</strong>. <em>Cambiando de nuevo el tema, puede que la democracia tenga problemas, pero es mejor que cualquier otra forma de gobierno. ¿Hasta qué punto está de acuerdo o en desacuerdo con esta frase?</em></li>
+</ul>
+<p>Sin embargo, la evaluación de la democracia contempla no solo el apoyo sostenido en una democracia electoral sino que con el propósito de comprender mejor el apoyo específico a la democracia en la región resulta importante conocer las percepciones de la ciudadanía sobre cómo funciona la democracia. Tal como se menciona en el informe del Barómetro de las Américas 2018/2019, “la satisfacción con la democracia y la condición de democracia del sistema político son importantes para entender el apoyo popular a la democracia, y sirven como base del compromiso ciudadano con ella, condición fundamental para la consolidación de la democracia” (Carrión et al 2020). En ese sentido, se ha realizado la siguiente pregunta con respecto a la satisfacción con la democracia:</p>
+<ul>
+<li><strong>PN4</strong>. <em>En general, ¿usted diría que está muy satisfecho(a), satisfecho(a), insatisfecho(a) o muy insatisfecho(a) con la forma en que la democracia funciona en Perú?</em></li>
+</ul>
+<p>Para dar respuesta a la pregunta inicial que orienta el presente trabajo, a continuación, se inicia con la presentación de resultados de apoyo y satisfacción con la democracia para cada uno de los años de estudio desde el año más reciente, 2019, hasta la medición del año 2008.</p>
+<p>Con respecto al apoyo a la democracia si tenemos en consideración que los entrevistados entregan una respuesta que va de 1 a 7, donde 1 significa “muy en desacuerdo” y 7 significa “muy de acuerdo.” En el siguiente gráfico, se observa que para el año 2019, las principales respuestas se concentran en el nivel 4 (26,6%) y 5 (26,2%), respectivamente. Así, más del 50% de datos se ubican allí lo cual nos indica que hay un nivel medio de apoyo a la democracia, sin embargo, si se considera desde el valor 5 al 7 se obtiene que solo el 48,4% apoya a la democracia como sistema de gobierno en el año 2019.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="pulsoDemocracia.html#cb65-1" aria-hidden="true" tabindex="-1"></a>Apoyo_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb65-2"><a href="pulsoDemocracia.html#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">&quot;2019&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb65-3"><a href="pulsoDemocracia.html#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,ing4,porcentaje) <span class="sc">%&gt;%</span></span>
+<span id="cb65-4"><a href="pulsoDemocracia.html#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(porcentaje,ing4)) <span class="sc">+</span> </span>
+<span id="cb65-5"><a href="pulsoDemocracia.html#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> ing4)) <span class="sc">+</span></span>
+<span id="cb65-6"><a href="pulsoDemocracia.html#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de apoyo a la democracia 2019&quot;</span>) <span class="sc">+</span></span>
+<span id="cb65-7"><a href="pulsoDemocracia.html#cb65-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">&quot;Fuente: LAPOP 2019&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Porcentaje&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Apoyoalademocracia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb65-8"><a href="pulsoDemocracia.html#cb65-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> porcentaje)) <span class="sc">+</span></span>
+<span id="cb65-9"><a href="pulsoDemocracia.html#cb65-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p>La satisfacción con la democracia “es un indicador del apoyo al desempeño del régimen democrático” (Linde y Eckman 2003, p. 399.). En efecto, si se tiene en cuenta que los entrevistados pueden dar una respuesta que va de 1 a 4, donde 1 significa “muy satisfecho”y 4 significa “muy insatisfecho.” Para el año 2019, se observa que la insatisfacción con la democracia supera el 70%, mientras que solo el 27,5% de los peruanos está satisfecho con el funcionamiento de la democracia en el Perú.</p>
+<p>Cabe destacar que si bien la satisfacción pública con el funcionamiento de la democracia también ha descendido, la tolerancia a los golpes de estado ejecutivos - es decir, que el Ejecutivo cierre el Congreso- ha continuado en aumento (Zechmeister &amp; Lupu, 2019; Bustamante &amp; Zechmeister, 2019).</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="pulsoDemocracia.html#cb66-1" aria-hidden="true" tabindex="-1"></a>Satisfaccion_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb66-2"><a href="pulsoDemocracia.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">&quot;2019&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-3"><a href="pulsoDemocracia.html#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pn4,porcentaje) <span class="sc">%&gt;%</span></span>
+<span id="cb66-4"><a href="pulsoDemocracia.html#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(porcentaje,pn4))  <span class="sc">+</span> </span>
+<span id="cb66-5"><a href="pulsoDemocracia.html#cb66-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> pn4 )) <span class="sc">+</span></span>
+<span id="cb66-6"><a href="pulsoDemocracia.html#cb66-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de satisfacción con la democracia 2019&quot;</span>) <span class="sc">+</span></span>
+<span id="cb66-7"><a href="pulsoDemocracia.html#cb66-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">&quot;Fuente: LAPOP 2019&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Porcentaje&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sastifaccionconlademocracia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb66-8"><a href="pulsoDemocracia.html#cb66-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> porcentaje)) <span class="sc">+</span></span>
+<span id="cb66-9"><a href="pulsoDemocracia.html#cb66-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<p>El apoyo a la democracia en el año 2017 indica que las principales respuestas se concentran en el nivel 4 (24,4%) y 5 (25%). De este modo, cerca del 50% de los datos se ubican en un nivel medio de apoyo a la democracia y si se considera desde el valor 5 al 7 se obtiene que el 53% apoya a la democracia en el año 2017.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="pulsoDemocracia.html#cb67-1" aria-hidden="true" tabindex="-1"></a>Apoyo_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb67-2"><a href="pulsoDemocracia.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">&quot;2017&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb67-3"><a href="pulsoDemocracia.html#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,ing4,porcentaje) <span class="sc">%&gt;%</span></span>
+<span id="cb67-4"><a href="pulsoDemocracia.html#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(porcentaje,ing4)) <span class="sc">+</span> </span>
+<span id="cb67-5"><a href="pulsoDemocracia.html#cb67-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> ing4)) <span class="sc">+</span></span>
+<span id="cb67-6"><a href="pulsoDemocracia.html#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de apoyo a la democracia 2017&quot;</span>) <span class="sc">+</span></span>
+<span id="cb67-7"><a href="pulsoDemocracia.html#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">&quot;Fuente: LAPOP 2017&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Porcentaje&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Apoyoalademocracia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb67-8"><a href="pulsoDemocracia.html#cb67-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> porcentaje)) <span class="sc">+</span></span>
+<span id="cb67-9"><a href="pulsoDemocracia.html#cb67-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<p>Con respecto a la sastifacción con la democracia para el año 2017, resulta preponderante la insastisfacción con la democracia la cual se ubica en 69,8%, mientras que la satisfacción cerca al 28%; al igual que en el año 2019.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="pulsoDemocracia.html#cb68-1" aria-hidden="true" tabindex="-1"></a>Satisfaccion_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb68-2"><a href="pulsoDemocracia.html#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">&quot;2017&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb68-3"><a href="pulsoDemocracia.html#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pn4,porcentaje) <span class="sc">%&gt;%</span></span>
+<span id="cb68-4"><a href="pulsoDemocracia.html#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(porcentaje,pn4))  <span class="sc">+</span> </span>
+<span id="cb68-5"><a href="pulsoDemocracia.html#cb68-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> pn4 )) <span class="sc">+</span></span>
+<span id="cb68-6"><a href="pulsoDemocracia.html#cb68-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de satisfacción con la democracia 2017&quot;</span>) <span class="sc">+</span></span>
+<span id="cb68-7"><a href="pulsoDemocracia.html#cb68-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">&quot;Fuente: LAPOP 2017&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Porcentaje&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sastifaccionconlademocracia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb68-8"><a href="pulsoDemocracia.html#cb68-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> porcentaje)) <span class="sc">+</span></span>
+<span id="cb68-9"><a href="pulsoDemocracia.html#cb68-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<p>Para el año 2014, el porcentaje de apoyo a la democracia que incluye desde los valores 5 al 7 se ubica en 58,6%; es decir, más del 50% de peruanos estaba de acuerdo con el apoyo a la democracia en dicho año; a diferencia de las mediciones posteriores como en el 2019 donde los valores no superan el 50% de apoyo a la democracia.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="pulsoDemocracia.html#cb69-1" aria-hidden="true" tabindex="-1"></a>Apoyo_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb69-2"><a href="pulsoDemocracia.html#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">&quot;2014&quot;</span>, <span class="sc">!</span><span class="fu">is.na</span>(ing4)) <span class="sc">%&gt;%</span></span>
+<span id="cb69-3"><a href="pulsoDemocracia.html#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,ing4,porcentaje) <span class="sc">%&gt;%</span></span>
+<span id="cb69-4"><a href="pulsoDemocracia.html#cb69-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(porcentaje,ing4)) <span class="sc">+</span> </span>
+<span id="cb69-5"><a href="pulsoDemocracia.html#cb69-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> ing4)) <span class="sc">+</span></span>
+<span id="cb69-6"><a href="pulsoDemocracia.html#cb69-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de apoyo a la democracia 2014&quot;</span>) <span class="sc">+</span></span>
+<span id="cb69-7"><a href="pulsoDemocracia.html#cb69-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">&quot;Fuente: LAPOP 2014&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Porcentaje&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Apoyoalademocracia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb69-8"><a href="pulsoDemocracia.html#cb69-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> porcentaje)) <span class="sc">+</span></span>
+<span id="cb69-9"><a href="pulsoDemocracia.html#cb69-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_fivethirtyeight</span>() <span class="sc">+</span></span>
+<span id="cb69-10"><a href="pulsoDemocracia.html#cb69-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<p>Al revisar la sastifacción con la democracia para el año 2014, se encuentra que el 62,2% estaba insatisfecho con la democracia, y más del 35% de peruanos se sentía satisfecho con su funcionamiento. Cabe destacar que esto evidencia la tendencia a decrecimiento sostenido de la satisfacción con la democracia, ya que para el 2017 y 2019, la satisfacción con la democracia por parte de los peruanos no supera el 30%.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="pulsoDemocracia.html#cb70-1" aria-hidden="true" tabindex="-1"></a>Satisfaccion_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb70-2"><a href="pulsoDemocracia.html#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">&quot;2014&quot;</span>,<span class="sc">!</span><span class="fu">is.na</span>(pn4)) <span class="sc">%&gt;%</span></span>
+<span id="cb70-3"><a href="pulsoDemocracia.html#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pn4,porcentaje) <span class="sc">%&gt;%</span></span>
+<span id="cb70-4"><a href="pulsoDemocracia.html#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(pn4,porcentaje))  <span class="sc">+</span> </span>
+<span id="cb70-5"><a href="pulsoDemocracia.html#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> pn4 )) <span class="sc">+</span></span>
+<span id="cb70-6"><a href="pulsoDemocracia.html#cb70-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de satisfacción con la democracia 2014&quot;</span>) <span class="sc">+</span></span>
+<span id="cb70-7"><a href="pulsoDemocracia.html#cb70-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">&quot;Fuente: LAPOP 2014&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Porcentaje&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sastifaccionconlademocracia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb70-8"><a href="pulsoDemocracia.html#cb70-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> porcentaje)) <span class="sc">+</span></span>
+<span id="cb70-9"><a href="pulsoDemocracia.html#cb70-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<p>En el año 2012, el porcentaje de apoyo a la democracia que incluye desde los valores 5 a 7 se ubica en 59,6%; es decir, cerca del 60% de peruanos estaba de acuerdo con el apoyo a la democracia en el 2012. Por el contrario, una menor proporción no apoyó la democracia como forma de gobierno preferible.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="pulsoDemocracia.html#cb71-1" aria-hidden="true" tabindex="-1"></a>Apoyo_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb71-2"><a href="pulsoDemocracia.html#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">&quot;2012&quot;</span>, <span class="sc">!</span><span class="fu">is.na</span>(ing4)) <span class="sc">%&gt;%</span></span>
+<span id="cb71-3"><a href="pulsoDemocracia.html#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,ing4,porcentaje) <span class="sc">%&gt;%</span></span>
+<span id="cb71-4"><a href="pulsoDemocracia.html#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(porcentaje,ing4)) <span class="sc">+</span> </span>
+<span id="cb71-5"><a href="pulsoDemocracia.html#cb71-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> ing4)) <span class="sc">+</span> </span>
+<span id="cb71-6"><a href="pulsoDemocracia.html#cb71-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de apoyo a la democracia 2012&quot;</span>) <span class="sc">+</span></span>
+<span id="cb71-7"><a href="pulsoDemocracia.html#cb71-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">&quot;Fuente: LAPOP 2012&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Porcentaje&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Apoyoalademocracia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb71-8"><a href="pulsoDemocracia.html#cb71-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> porcentaje)) <span class="sc">+</span></span>
+<span id="cb71-9"><a href="pulsoDemocracia.html#cb71-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+<p>Si se observa la sastifacción con la democracia para dicho año, se encuentra que el 51,8% de peruanos se sentía satisfecho con la democracia y el 48,2% estaba insatisfecho con la democracia.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="pulsoDemocracia.html#cb72-1" aria-hidden="true" tabindex="-1"></a>Satisfaccion_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb72-2"><a href="pulsoDemocracia.html#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">&quot;2012&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb72-3"><a href="pulsoDemocracia.html#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pn4,porcentaje) <span class="sc">%&gt;%</span></span>
+<span id="cb72-4"><a href="pulsoDemocracia.html#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(porcentaje,pn4)) <span class="sc">+</span> </span>
+<span id="cb72-5"><a href="pulsoDemocracia.html#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> pn4 )) <span class="sc">+</span></span>
+<span id="cb72-6"><a href="pulsoDemocracia.html#cb72-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de satisfacción con la democracia 2012&quot;</span>) <span class="sc">+</span></span>
+<span id="cb72-7"><a href="pulsoDemocracia.html#cb72-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">&quot;Fuente: LAPOP 2012&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Porcentaje&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sastifaccionconlademocracia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb72-8"><a href="pulsoDemocracia.html#cb72-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> porcentaje)) <span class="sc">+</span></span>
+<span id="cb72-9"><a href="pulsoDemocracia.html#cb72-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<p>Para el año 2010, el porcentaje de apoyo a la democracia que incluye desde los valores 5 al 7 se ubica en 51,9%; en otras palabras, más del 50% de peruanos estaba de acuerdo con el apoyo a la democracia en el 2010.</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="pulsoDemocracia.html#cb73-1" aria-hidden="true" tabindex="-1"></a>Apoyo_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb73-2"><a href="pulsoDemocracia.html#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">&quot;2010&quot;</span>, <span class="sc">!</span><span class="fu">is.na</span>(ing4)) <span class="sc">%&gt;%</span></span>
+<span id="cb73-3"><a href="pulsoDemocracia.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,ing4,porcentaje) <span class="sc">%&gt;%</span></span>
+<span id="cb73-4"><a href="pulsoDemocracia.html#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(porcentaje,ing4)) <span class="sc">+</span> </span>
+<span id="cb73-5"><a href="pulsoDemocracia.html#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> ing4)) <span class="sc">+</span> </span>
+<span id="cb73-6"><a href="pulsoDemocracia.html#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de apoyo a la democracia 2010&quot;</span>) <span class="sc">+</span></span>
+<span id="cb73-7"><a href="pulsoDemocracia.html#cb73-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">&quot;Fuente: LAPOP 2010&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Porcentaje&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Apoyoalademocracia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb73-8"><a href="pulsoDemocracia.html#cb73-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> porcentaje)) <span class="sc">+</span></span>
+<span id="cb73-9"><a href="pulsoDemocracia.html#cb73-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p>Al revisar la sastifacción con la democracia para el año 2010, se observa que solo el 39% de los peruanos estaba satisfecho con la democracia, mientras que en las categorías insatisfecho y muy insatisfecho se encuentran valores de 54,8% y 6,2%, respectivamente.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="pulsoDemocracia.html#cb74-1" aria-hidden="true" tabindex="-1"></a>Satisfaccion_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb74-2"><a href="pulsoDemocracia.html#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">&quot;2010&quot;</span>, <span class="sc">!</span><span class="fu">is.na</span>(pn4)) <span class="sc">%&gt;%</span></span>
+<span id="cb74-3"><a href="pulsoDemocracia.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pn4,porcentaje) <span class="sc">%&gt;%</span></span>
+<span id="cb74-4"><a href="pulsoDemocracia.html#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(pn4,porcentaje))  <span class="sc">+</span> </span>
+<span id="cb74-5"><a href="pulsoDemocracia.html#cb74-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> pn4 )) <span class="sc">+</span> </span>
+<span id="cb74-6"><a href="pulsoDemocracia.html#cb74-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de satisfacción con la democracia 2010&quot;</span>) <span class="sc">+</span></span>
+<span id="cb74-7"><a href="pulsoDemocracia.html#cb74-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">&quot;Fuente: LAPOP 2010&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Porcentaje&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sastifaccionconlademocracia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb74-8"><a href="pulsoDemocracia.html#cb74-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> porcentaje))<span class="sc">+</span></span>
+<span id="cb74-9"><a href="pulsoDemocracia.html#cb74-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p>En el año 2008, el porcentaje de apoyo a la democracia que incluye desde los valores 5 a 7 se ubicó en 62,5%. Sin embargo, se encuentra un 37,4% de peruanos que no apoyó a la democracia como mejor forma de gobierno.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="pulsoDemocracia.html#cb75-1" aria-hidden="true" tabindex="-1"></a>Apoyo_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb75-2"><a href="pulsoDemocracia.html#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">&quot;2008&quot;</span>, <span class="sc">!</span><span class="fu">is.na</span>(ing4)) <span class="sc">%&gt;%</span></span>
+<span id="cb75-3"><a href="pulsoDemocracia.html#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,ing4,porcentaje) <span class="sc">%&gt;%</span></span>
+<span id="cb75-4"><a href="pulsoDemocracia.html#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(porcentaje,ing4)) <span class="sc">+</span> </span>
+<span id="cb75-5"><a href="pulsoDemocracia.html#cb75-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> ing4)) <span class="sc">+</span></span>
+<span id="cb75-6"><a href="pulsoDemocracia.html#cb75-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de apoyo a la democracia 2008&quot;</span>) <span class="sc">+</span></span>
+<span id="cb75-7"><a href="pulsoDemocracia.html#cb75-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">&quot;Fuente: LAPOP 2008&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Porcentaje&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Apoyoalademocracia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb75-8"><a href="pulsoDemocracia.html#cb75-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> porcentaje)) <span class="sc">+</span></span>
+<span id="cb75-9"><a href="pulsoDemocracia.html#cb75-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p>Con respecto a la sastifacción con la democracia para el año 2008, solo el 35,2% de los peruanos estaba satisfecho con la democracia, mientras que en las categorías insatisfecho y muy insatisfecho se encuentran valores de 57,5% y 7,3%, respectivamente.</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="pulsoDemocracia.html#cb76-1" aria-hidden="true" tabindex="-1"></a>Satisfaccion_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb76-2"><a href="pulsoDemocracia.html#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">&quot;2008&quot;</span>,  <span class="sc">!</span><span class="fu">is.na</span>(pn4)) <span class="sc">%&gt;%</span></span>
+<span id="cb76-3"><a href="pulsoDemocracia.html#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pn4,porcentaje) <span class="sc">%&gt;%</span></span>
+<span id="cb76-4"><a href="pulsoDemocracia.html#cb76-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">porcentaje =</span> <span class="fu">round</span> (porcentaje, <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb76-5"><a href="pulsoDemocracia.html#cb76-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(pn4,porcentaje)) <span class="sc">+</span> </span>
+<span id="cb76-6"><a href="pulsoDemocracia.html#cb76-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> pn4 )) <span class="sc">+</span> </span>
+<span id="cb76-7"><a href="pulsoDemocracia.html#cb76-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de satisfacción con la democracia 2008&quot;</span>) <span class="sc">+</span></span>
+<span id="cb76-8"><a href="pulsoDemocracia.html#cb76-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">&quot;Fuente: LAPOP 2008&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Porcentaje&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sastifaccionconlademocracia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb76-9"><a href="pulsoDemocracia.html#cb76-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> porcentaje)) <span class="sc">+</span></span>
+<span id="cb76-10"><a href="pulsoDemocracia.html#cb76-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+</div>
+<div id="satisfacción-con-la-democracia-perú-2008---2019" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Satisfacción con la democracia, Perú 2008 - 2019</h3>
+<p>Luego del análisis por cada uno de los años de estudio según la variable seleccionada, se pretende realizar un análisis longitudinal a través de un gráfico según las dos variables. Primero, iniciamos con la satisfacción con la democracia en el Perú durante el periodo 2008 - 2019.</p>
+<p>En este gráfico se muestra el porcentaje de peruanos satisfechos con la democracia a través del tiempo. Aquí se encuentra una tendencia interesante la cual muestra que mientras la insatisfacción ha ido creciendo y posicionándose cerca al <strong>70%</strong> en las dos últimas mediciones, efectivamente la satisfacción ha descendido marcadamente desde el año 2012 - su pico más alto de satisfacción (48,2%)- llegando a ubicarse para el 2019 en 27,5%. Cabe destacar que apenas dos puntos porcentuales por encima de Panamá (26,1%), Perú tiene el segundo más bajo nivel de satisfacción promedio con el funcionamiento de la democracia en la región durante el año 2019: <strong>28%</strong>.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="pulsoDemocracia.html#cb77-1" aria-hidden="true" tabindex="-1"></a>Satisfaccion_democracia2 <span class="sc">%&gt;%</span></span>
+<span id="cb77-2"><a href="pulsoDemocracia.html#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(categoria <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Satisfaccion&quot;</span>,<span class="st">&quot;Insatisfaccion&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb77-3"><a href="pulsoDemocracia.html#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year,categoria)<span class="sc">%&gt;%</span></span>
+<span id="cb77-4"><a href="pulsoDemocracia.html#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Satisfaccion_democracia =</span> <span class="fu">sum</span>(porcentaje))<span class="sc">%&gt;%</span></span>
+<span id="cb77-5"><a href="pulsoDemocracia.html#cb77-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year,Satisfaccion_democracia)) <span class="sc">+</span> </span>
+<span id="cb77-6"><a href="pulsoDemocracia.html#cb77-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> categoria )) <span class="sc">+</span></span>
+<span id="cb77-7"><a href="pulsoDemocracia.html#cb77-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> Satisfaccion_democracia)) <span class="sc">+</span></span>
+<span id="cb77-8"><a href="pulsoDemocracia.html#cb77-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Satisfacción con la democracia, Perú 2008 - 2019&quot;</span>) <span class="sc">+</span></span>
+<span id="cb77-9"><a href="pulsoDemocracia.html#cb77-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">&quot;Fuente:LAPOP 2008 - 2019&quot;</span>,<span class="at">x =</span> <span class="st">&quot;year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sastifaccion_democracia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb77-10"><a href="pulsoDemocracia.html#cb77-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2008</span>, <span class="dv">2010</span>, <span class="dv">2012</span>, <span class="dv">2014</span>, <span class="dv">2017</span>, <span class="dv">2019</span>)) <span class="sc">+</span></span>
+<span id="cb77-11"><a href="pulsoDemocracia.html#cb77-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist_white</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+</div>
+<div id="apoyo-a-la-democracia-perú-2008---2019" class="section level3" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Apoyo a la democracia, Perú 2008 - 2019</h3>
+<p>Segundo, el nivel de apoyo a la democracia en Perú a través del tiempo se muestra en el siguiente gráfico. Si bien se han registrado variaciones desde los inicios de la medición, la tendencia reciente es claramente a la baja. Desde el 2012, el apoyo promedio a la democracia en Perú decrece en cada medición y ha caído cerca de quince puntos porcentuales durante la última década. De hecho, el apoyo a la democracia como sistema registrado por la encuesta 2019 es el más bajo desde que comenzaron las mediciones, solo el <strong>48,4% consideran a la democracia como el régimen político preferible. También la satisfacción con el funcionamiento de la democracia registra sus menores niveles.</strong></p>
+<p>En ese sentido, en el siguiente apartado se propone explorar con respecto a la relación entre ambas variables numéricas.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="pulsoDemocracia.html#cb78-1" aria-hidden="true" tabindex="-1"></a>apoyo_democracia2 <span class="sc">%&gt;%</span></span>
+<span id="cb78-2"><a href="pulsoDemocracia.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(categoria <span class="sc">==</span> <span class="st">&quot;Apoyo&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-3"><a href="pulsoDemocracia.html#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year,categoria)<span class="sc">%&gt;%</span></span>
+<span id="cb78-4"><a href="pulsoDemocracia.html#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Apoyo_democracia =</span> <span class="fu">sum</span>(porcentaje))<span class="sc">%&gt;%</span></span>
+<span id="cb78-5"><a href="pulsoDemocracia.html#cb78-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year,Apoyo_democracia)) <span class="sc">+</span> </span>
+<span id="cb78-6"><a href="pulsoDemocracia.html#cb78-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> categoria )) <span class="sc">+</span></span>
+<span id="cb78-7"><a href="pulsoDemocracia.html#cb78-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> Apoyo_democracia)) <span class="sc">+</span></span>
+<span id="cb78-8"><a href="pulsoDemocracia.html#cb78-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Apoyo a la democracia, Perú 2008 - 2019&quot;</span>) <span class="sc">+</span></span>
+<span id="cb78-9"><a href="pulsoDemocracia.html#cb78-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">&quot;Fuente:LAPOP 2008 - 2019&quot;</span>,<span class="at">x =</span> <span class="st">&quot;year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Apoyo_democracia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb78-10"><a href="pulsoDemocracia.html#cb78-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2008</span>, <span class="dv">2010</span>, <span class="dv">2012</span>, <span class="dv">2014</span>, <span class="dv">2017</span>, <span class="dv">2019</span>)) <span class="sc">+</span></span>
+<span id="cb78-11"><a href="pulsoDemocracia.html#cb78-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+</div>
+<div id="existe-relación-entre-el-apoyo-y-la-satifacción-con-la-democracia-en-el-perú" class="section level3" number="4.4.4">
+<h3><span class="header-section-number">4.4.4</span> ¿Existe relación entre el apoyo y la satifacción con la democracia en el Perú?</h3>
+<p>Hacemos el diagrama de dispersión para observar la posible relación entre ambas variables. Tal como se aprecia, según la ubicación de los puntos en el gráfico de dispersión <em>no hay una relación clara entre el apoyo y la satisfacción con la democracia</em>. En efecto, una limitación es la poca cantidad de datos observables en el gráfico que no muestra una tendencia definida en la relación de ambas variables. Si se analiza en función a los años se encuentra que la relación se vuelve más difusa para el año 2010 donde no se aproxima a la línea del gráfico de dispersión.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="pulsoDemocracia.html#cb79-1" aria-hidden="true" tabindex="-1"></a>apoyoysatisfaccion_democracia <span class="sc">%&gt;%</span></span>
+<span id="cb79-2"><a href="pulsoDemocracia.html#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Satisfaccion_democracia, Apoyo_democracia)) <span class="sc">+</span></span>
+<span id="cb79-3"><a href="pulsoDemocracia.html#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb79-4"><a href="pulsoDemocracia.html#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Apoyo y satisfacción con la democracia, Perú 2008 - 2019&quot;</span>, </span>
+<span id="cb79-5"><a href="pulsoDemocracia.html#cb79-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Fuente:LAPOP 2008 - 2019&quot;</span>) <span class="sc">+</span></span>
+<span id="cb79-6"><a href="pulsoDemocracia.html#cb79-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_stata</span>()</span></code></pre></div>
+<p><img src="grupo_2021_mayo_junio_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+</div>
+</div>
+<div id="conclusiones-3" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Conclusiones</h2>
+<div id="la-democracia-en-el-perú-pierde-seguidores" class="section level3" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> La democracia en el Perú pierde seguidores</h3>
+<p>En conclusión, los problemas de la democracia y la falta de resultados en América Latina influyen en la opinión de los ciudadanos sobre su apoyo a este régimen político: la democracia. Los resultados del Latinobarómetro revelan el deterioro regular y ascendente de las democracias como fenómeno común y preocupante para América Latina, y el Perú no es la excepción. De acuerdo con los datos expuestos y el último Informe del Barómetro de las Américas 2018/19, del Proyecto de Opinión Pública de América Latina (LAPOP), el apoyo a la democracia – así como la satisfacción con el funcionamiento de la misma – ha ido variando sostenidamente durante la última década de evaluación con una tendencia hacia la disminución progresiva.</p>
+<p>Con respecto al apoyo a la democracia en el Perú, se identifica un descenso sostenido desde el 2012 y para el 2019 se registró que <em>menos del 50% de peruanos apoya la democracia como la mejor forma de gobierno en el país</em>, uno de los niveles más bajos en la región – solo por encima de Bolivia, Guatemala y Honduras- y el menor valor desde el 2006 que se realizan estas mediciones del Barómetro de las Américas en el Perú, estando siempre por debajo del promedio regional. Asimismo, si nos referimos al nivel de satisfacción de los peruanos con la democracia los resultados tampoco son alentadores, en los últimos años <em>la satisfacción con la democracia cayó a 28%</em>.</p>
+<p>En efecto, tal como argumentan Levitsky &amp; Ziblatt (2018), la forma en cómo mueren las democracias mayoritariamente se evidencia en el debilitamiento gradual y silencioso de éstas. Por ejemplo, el caso peruano es relevador para explorar mayores espacios de análisis con respecto al debilitamiento de la democracia evidenciada en la falta de apoyo y sastisfacción con esta forma de gobierno. De hecho, al revisar la relación entre apoyo y satisfacción con la democracia a través de un gráfico de dispersión se encuentra que <em>no hay una relación clara entre ambas variables, pese a que ambas a través del tiempo han ido disminuyendo en su evaluación</em>.</p>
+<p>Finalmente, esta aproximación inicial nos brinda un primer panorama con respecto al estado de la democracia en el Perú el cual debe ser analizado con mayor profundidad a través del uso de otras variables que permitan complementar un diagnóstico con el objetivo de mejorar la legitimidad y la representación política de la ciudadanía. Ello teniendo en consideración que “la democracia electoral tiene mayor probabilidad de ser legitimada en la medida que haya un alto nivel de satisfacción con la democracia y que la ciudadanía perciba que el sistema es democrático” (Carrión et al 2020). En efecto, ambos elementos resultan ser componentes centrales para la gobernabilidad democrática del país.</p>
+</div>
+</div>
+<div id="referencias-1" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> Referencias</h2>
+<p>Carrión, J. F., Zárate, P., &amp; Zechmeister, E. J. (2020). Cultura política de la democracia en Perú y en las Américas, 2018/19: Tomándole el pulso a la democracia. Disponible en: <a href="https://iep.org.pe" class="uri">https://iep.org.pe</a></p>
+<p>Levitsky, S., &amp; Ziblatt, D. (2018). How democracies die. Broadway Books.</p>
+<p>Linde, Jonas y Joakim Ekman. 2003. “Satisfaction with Democracy; A Note on the Frequently Used Indicator in Comparative Politics.” European Journal of Political Research 42: 391-408.</p>
+<p>Linz, J.J. &amp; Stepan, A. (1996). Problems of democratic consolidation. Southern Europe, South America, and Post-Comunist Europe. Baltimore: John Hopkins University Press.</p>
+<p>Mariani, R. (coord.). (2008). Democracia/Estado/Ciudadanía: hacia un Estado de y para la democracia en América Latina. Lima: Sede PNUD (Programa de las Naciones Unidas para el Desarrollo - PNUD).</p>
+<p>Mariani, R. (2008). Democracia, Estado y construcción del sujeto (ciudadanía). En Mariani, R. (coord.). Democracia/Estado/Ciudadanía: Hacia un Estado de y para la Democracia en América Latina. Lima: Sede PNUD (Programa de las Naciones Unidas para el Desarrollo - PNUD), pp. 79-98.</p>
+<p>O’Donnell, G. (2004). Notas sobre la democracia en América Latina. En La democracia en América Latina. Hacia una democracia de ciudadanas y ciudadanos. Anexo: El debate conceptual sobre la democracia (CD ROM). Buenos Aires: PNUD, Aguilar, Altea, Taurus, Alfaguara, pp. 11-82.</p>
+<p>O’Donnell, G. (2004). El desarrollo de la democracia en América Latina. En La democracia en América Latina. Hacia una democracia de ciudadanas y ciudadanos. Anexo: El debate conceptual sobre la democracia (CD ROM). Buenos Aires: PNUD, Aguilar, Altea, Taurus, Alfaguara, pp. 33-73.</p>
+<p>O’Donnell, G. (2004). Acerca del Estado en América Latina contemporánea: diez tesis para discusión. En La democracia en América Latina. Hacia una democracia de ciudadanas y ciudadanos. Anexo: El debate conceptual sobre la democracia (CD ROM). Buenos Aires: PNUD, Aguilar, Altea, Taurus, Alfaguara, pp. 149-192.</p>
+<p>Ramírez Bustamante, Mariana V., y Elizabeth J. Zechmeister. 2019. Toleranciaa los “golpes de Estado” ejecutivos en Perú. Topical Brief, número 35: 1-5. LAPOP: Nashville,TN.
+<a href="https://www.vanderbilt.edu/lapop/insights/ITB035es.pdf" class="uri">https://www.vanderbilt.edu/lapop/insights/ITB035es.pdf</a></p>
+<p>Zechmeister, E. J., &amp; Lupu, N. (2019). El Barómetro de las Américas 2018/19.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="eleccionesSJL.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="orgJuveniles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["grupo_2021_mayo_junio.pdf", "grupo_2021_mayo_junio.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

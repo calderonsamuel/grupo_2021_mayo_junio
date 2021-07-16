@@ -1,0 +1,59 @@
+---
+title: "Elaboración de productos de datos: Reportes con R Markdown"
+author: "Samuel Calderon, Felipe Bedoya, Maira Chamota, Jennifer Ponce, Nelly Reyes, Almendra Rodriguez"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Este libro es una compilación de reportes individuales trabajados durante mayo y junio del 2021 en el Taller de Elaboración de productos de datos dictado por Samuel Calderon."
+---
+
+# Presentación {.unnumbered}
+
+Este libro digital es un esfuerzo conjunto de los participantes del Taller de Elaboración de productos de datos dictado durante cuatro semanas entre los meses de mayo y junio de 2021. A pesar de que el taller tuvo una participación regular de alrededor 10 personas en las sesiones, fueron cinco personas quienes optaron por participar del proyecto final, que no era obligatorio.
+
+El taller tuvo como público objetivo a estudiantes o egresados de carreras de ciencias sociales, periodismo o educación con interés en aprender herramientas de análisis y visualización de datos. El contenido del taller buscó ser apropiado para personas sin experiencia con ningún lenguaje de programación.
+
+A través del desarrollo de sesiones que combinaron teoría y práctica, se esperaba que los participantes adquieran las siguientes habilidades:
+
+-   Elementos básicos del análisis de datos usando R a través de RStudio
+
+    -   Importación de datos
+
+    -   Limpieza y ordenamiento de datos
+
+    -   Análisis exploratorio de datos ordenados (tidy data)
+
+-   Elaboración de reportes de análisis de datos usando R Markdown
+
+Como se podrá apreciar en los capítulos que componen esta compilación, los participantes lograron alcanzar los aprendizajes esperados. Sin embargo, sí debo manifestar como aprendizaje propio que debió hacerse mayor hincapié en el desarrollo de habilidades de limpieza y ordenamiento de datos.
+
+Las presentaciones y ejercicios resueltos de las sesiones se encuentran en [mi perfil de Rpubs.com](https://rpubs.com/scalderon). También es posible acceder al [repositorio en Github]() de este libro digital.
+
+# Sobre los autores {.unnumbered}
+
+## Felipe Bedoya {.unnumbered}
+
+Politólogo de la Pontificia Universidad Católica del Perú. Diplomado en Industrias Extractivas y Desarrollo por la PUCP y Políticas Públicas por la Universidad del Pacífico. Nacido en Lima, Perú. Cuenta con experiencia profesional en la gestión de proyectos de desarrollo y gestión de recursos naturales con organismos internacionales y organizaciones de la sociedad civil. Anteriormente ha llevado algunos cursos de R y quisiera usarlo de manera más recurrente en el análisis y gestión de información. Tiene interés en áreas de gestión y análisis de información social y económica para la implementación de proyectos sociales y alianzas estratégicas multi-actor que promuevan el desarrollo sostenible.
+
+## Maira Chamota {.unnumbered}
+
+Politóloga de la Universidad Nacional Mayor de San Marcos. Actualmente integra el Consejo Directivo de la Asociación Peruana de Politólogas. Ha sido asistente de investigación para entidades gubernamentales y de cooperación internacional: Ha tenido experiencia manejando R a nivel básico, así como experiencia previa en análisis de datos cuantitativos y cualitativos. Proviene de la ciudad de Lima y le interesan los temas de desarrollo humano, salud pública, desigualdades, género y economía.
+
+## Jennifer Ponce {.unnumbered}
+
+Politóloga de la Universidad Antonio Ruiz de Montoya (UARM). Diplomada en Educación Popular. Ha tenido experiencia laboral en investigación educativa y social en el Ministerio de Educación de Perú, Ha sido analista de la calidad de la educación en la Universidad San Martin de Porres y la UARM, y ha sido también jefe de practica en la Pontifia Universidadd Católica Del Perú. Tiene experiencia como profesora de Historias, Actualidad y Noticias en una comunidad de aprendizajes. Se identifica como Luriganchina (Lima, Perú). Es activista local y feminista en dos organizaciones locales: SJL en Acción y Ni Una Menos Somos Todas-SJL. Antes del taller no tenía conocimientos de ningún lenguaje de programación, pero sí sabía del manejo de bases de datos y uso de algunas funciones con el software Microsoft Excel. Tiene interés por investigar y desarrollar proyectos en temas de educación ciudadana, participación ciudadana, becas, ciudadanía glocal, y los asuntos luriganchinos. Actualmente, está haciendo una Maestría Análisis Comparativo y Social en Educación Internacional en la Universidad de Pittsburgh (Estados Unidos), gracias al Programa Fulbright; y un Diplomado en Gestión del Cambio y Desarrollo Territorial por la Escuela de Desarrollo.
+
+## Nelly Reyes {.unnumbered}
+
+Trabajadora Social de la Universidad Nacional Mayor de San Marcos con estudios de la Maestría en Gobierno y Políticas Públicas en la Pontificia Universidadd Católica Del Perú. Actualmente es consultora independiente, con experiencia de trabajo en instituciones privadas y públicas coordinando e implementando proyectos sociales y/o políticas públicas con las infancias, adolescencias y juventudes en diversas regiones del país. Previo al taller no había tenido experiencia en el uso de R para el análisis de datos, pero sí el uso de herramientas como Microsoft Excel y SPSS. En el primer trimestre del 2021 ha estado en proyectos sobre masculinidades igualitarias con adolescentes para la ONG Manuela Ramos y ha asumido el cargo de especialista para el componente de inclusión en la Dirección de Educación de Lima Metropolitana en el 2019 y 2020. Tiene interés en temas de juventudes, adolescencias, participación ciudadana, educación y género.
+
+## Almendra Rodriguez {.unnumbered}
+
+Politóloga por la Pontificia Universidad Católica del Perú (PUCP) con concentración en gestión pública e investigación social. Cuenta con una especialización en Obras por Impuestos (OxI) por la Universidad de Ingeniería y Tecnología (UTEC). Se ha desempeñado en el sector privado como asistente de proyectos en el área de Gestión Pública de APOYO Consultoría y en el sector público como coordinadora del observatorio electoral de la Dirección Nacional de Educación y Formación Cívica Ciudadana (DNEF) del Jurado Nacional de Elecciones (JNE), donde ha desarrollado proyectos e investigaciones que incluyen análisis cualitativo y cuantitativo. Previo al taller ha tenido experiencia en el uso de R para el análisis de datos. Asimismo, es miembro reconocido como mediadora de educación electoral por la Oficina Nacional de Procesos Electorales (ONPE), líder urbano de la organización Lima Cómo Vamos (LCV) y voluntaria en la organización Impulso País. Tiene experiencia e interés en diversos temas de investigación académica relacionados a democracia, educación, descentralización, participación ciudadana, presupuesto público, materia electoral, entre otros.
+
+## Samuel Calderon {.unnumbered}
+
+Politólogo de la Universidad Antonio Ruiz de Montoya. Fue el encargado de dictar el taller. Actualmente trabaja en la Superintendencia Nacional de Educación Universitaria - SUNEDU como miembro del Equipo Técnico Normativo de la Dirección de Licenciamiento. Aprendió a usar R el año 2019 y desde entonces ha tratado de "convertir" a otras personas. Miembro de la organización [DecideBien](https://github.com/DecideBienpe), colabora ocasionalmente en iniciativas de código abierto. Proviene de Lima, Perú. Su experiencia laboral ha sido siempre en el sector público (Instituto Nacional de Estadística e Informática, Ministerio de Salud, Escuela Nacional de Administración Pública, Ministerio de Vivienda, Ministerio de Educación, SUNEDU). Tiene interés en los temas de educación superior, organizaciones electorales y datos abiertos.
