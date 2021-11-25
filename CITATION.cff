@@ -1,0 +1,21 @@
+cff-version: 1.1.0
+message: "Please cite this work as shown."
+authors:
+  - family-names: Calderon Serrano
+    given-names: Samuel Enrique
+    orcid: https://orcid.org/0000-0001-6847-1210
+  - family-names: Bedoya
+    given-names: Felipe
+  - family-names: Chamota
+    given-names: Maira
+  - family-names: Ponce
+    given-names: Jennifer
+  - family-names: Reyes
+    given-names: Nelly
+  - family-names: Rodriguez
+    given-names: Almendra
+title: "Elaboración de productos de datos: Reportes con R Markdown"
+year: 2021
+url: "https://bookdown.org/samuelcs8_17/grupo_2021_mayo_junio/"
+version: v.1.0.0
+date-released: 2021-11-25
