@@ -15,6 +15,7 @@ authors:
   - family-names: Rodriguez
     given-names: Almendra
 title: "Elaboración de productos de datos: Reportes con R Markdown"
+doi: 10.5281/zenodo.5727840
 year: 2021
 url: "https://bookdown.org/samuelcs8_17/grupo_2021_mayo_junio/"
 version: v.1.0.0
